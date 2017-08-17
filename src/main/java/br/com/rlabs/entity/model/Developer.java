@@ -9,11 +9,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Type;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * The developer class.
@@ -41,9 +46,14 @@ public class Developer implements Serializable {
 	@Column(name = "active")
 	private boolean active;
 
+	@NotBlank(message = "#{developer.name.blank}")
+	@Size(min = 1, max = 150)
 	@Column(name = "name")
 	private String name;
 
+	@NotEmpty(message = "#{developer.email.empty}")
+	@Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\." + "[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
+			+ "(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message = "Invalid email.")
 	@Column(name = "email")
 	private String email;
 
@@ -93,6 +103,12 @@ public class Developer implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	@PrePersist
+	protected void onInsert() {
+		this.internal = UUID.randomUUID();
+		this.created = new Date();
 	}
 
 }

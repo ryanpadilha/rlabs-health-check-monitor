@@ -1,6 +1,7 @@
 package br.com.rlabs.service;
 
 import java.util.Collection;
+import java.util.UUID;
 
 import br.com.rlabs.entity.model.Developer;
 
@@ -17,9 +18,15 @@ public interface DeveloperService {
 
 	Developer get(Long id);
 
+	Developer getByInternal(UUID internal);
+
 	Developer insert(Developer developer);
 
 	Developer update(Long id, Developer developer);
 
+	Developer update(UUID internal, Developer developer);
+
 	Developer delete(Long id);
+
+	Developer delete(UUID internal);
 }

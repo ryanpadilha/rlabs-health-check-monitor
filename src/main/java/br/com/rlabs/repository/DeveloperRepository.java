@@ -1,6 +1,10 @@
 package br.com.rlabs.repository;
 
+import java.util.UUID;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import br.com.rlabs.entity.model.Developer;
 
@@ -13,4 +17,6 @@ import br.com.rlabs.entity.model.Developer;
  */
 public interface DeveloperRepository extends JpaRepository<Developer, Long> {
 
+	@Query("SELECT d FROM Developer d WHERE d.internal = :internal")
+	Developer findByInternal(@Param("internal") UUID internal);
 }

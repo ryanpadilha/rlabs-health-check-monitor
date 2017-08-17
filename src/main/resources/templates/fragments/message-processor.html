@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"  
+	xmlns:th="http://www.thymeleaf.org" 
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head></head>
+<body>
+
+<!-- message -->
+<!-- message_error -->
+<!-- message_error_file -->
+<!-- message_error_email -->
+<!-- message_info -->
+
+
+
+<div class="box-body" th:fragment="message-processor">
+
+ <div style="display: none;" class="alert alert-danger alert-dismissible">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  <h4><i class="icon fa fa-ban"></i> Info</h4>
+  Danger alert preview. This alert is dismissable. A wonderful serenity has taken possession of my entire
+  soul, like these sweet mornings of spring which I enjoy with my whole heart.
+ </div>
+
+ <div style="display: none;" class="alert alert-info alert-dismissible">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  <h4><i class="icon fa fa-info"></i> Info</h4>
+  Info alert preview. This alert is dismissable.
+ </div>
+
+ <!-- message_warning -->
+ <div id="process_message_warning" style="display: none;" class="alert alert-warning alert-dismissible">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  <h4><i class="icon fa fa-warning"></i> Info</h4>
+  <span></span>
+ </div>
+
+ <div style="display: none;" class="alert alert-success alert-dismissible">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  <h4><i class="icon fa fa-check"></i> Info</h4>
+  Success alert preview. This alert is dismissable.
+ </div>
+</div>
+
+</body>
+</html>

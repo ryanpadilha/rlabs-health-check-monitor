@@ -1,5 +1,7 @@
 package br.com.rlabs.controller;
 
+import java.util.UUID;
+
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -11,11 +13,11 @@ public interface DeveloperController {
 
 	ModelAndView list();
 
-	ModelAndView get(Long id);
+	ModelAndView getByInternal(UUID internal);
 
 	ModelAndView insert(Developer developer, BindingResult result);
 
-	ModelAndView update(Long id, Developer developer);
+	ModelAndView update(UUID internal, Developer developer);
 
-	ModelAndView delete(Long id);
+	ModelAndView delete(UUID internal);
 }

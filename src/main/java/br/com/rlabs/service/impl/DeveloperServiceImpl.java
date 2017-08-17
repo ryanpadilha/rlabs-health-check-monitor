@@ -1,6 +1,7 @@
 package br.com.rlabs.service.impl;
 
 import java.util.Collection;
+import java.util.UUID;
 
 import javax.transaction.Transactional;
 
@@ -34,6 +35,11 @@ public class DeveloperServiceImpl implements DeveloperService {
 		return repository.getOne(id);
 	}
 
+	@Override
+	public Developer getByInternal(UUID internal) {
+		return repository.findByInternal(internal);
+	}
+
 	@Transactional
 	@Override
 	public Developer insert(Developer developer) {
@@ -58,6 +64,32 @@ public class DeveloperServiceImpl implements DeveloperService {
 	@Override
 	public Developer delete(Long id) {
 		Developer persisted = repository.getOne(id);
+
+		if (null == persisted)
+			return null;
+
+		repository.delete(persisted);
+		return persisted;
+	}
+
+	@Transactional
+	@Override
+	public Developer update(UUID internal, Developer developer) {
+		Developer persisted = repository.findByInternal(internal);
+
+		if (null == persisted)
+			return null;
+
+		// just update name
+		persisted.setName(developer.getName());
+
+		return repository.save(persisted);
+	}
+
+	@Transactional
+	@Override
+	public Developer delete(UUID internal) {
+		Developer persisted = repository.findByInternal(internal);
 
 		if (null == persisted)
 			return null;

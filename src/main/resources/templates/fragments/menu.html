@@ -33,7 +33,7 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
-        <li class="active treeview">
+        <li class="treeview"> <!-- active -->
           <a href="#">
             <i class="fa fa-dashboard"></i> <span>Configuration</span>
             <span class="pull-right-container">
@@ -41,11 +41,13 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a th:href="@{/configuration/organization}"><i class="fa fa-circle-o"></i> Organization</a></li>
+          	<!-- class="active" -->
+            <li><a th:href="@{/configuration/organization}"><i class="fa fa-circle-o"></i> Organization</a></li>
             <li><a th:href="@{/configuration/developer}"><i class="fa fa-circle-o"></i> Developer</a></li>
           </ul>
         </li>
         
+        <!-- 
         <li class="treeview">
           <a href="#">
             <i class="fa fa-files-o"></i>
@@ -202,6 +204,7 @@
         <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
         <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
         <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
+        -->
       </ul>
     </section>
     <!-- /.sidebar -->
