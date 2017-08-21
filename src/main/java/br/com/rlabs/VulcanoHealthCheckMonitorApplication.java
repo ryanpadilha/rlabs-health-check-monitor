@@ -21,4 +21,5 @@ public class VulcanoHealthCheckMonitorApplication {
 		LOGGER.info("Running Vulcano Application");
 		SpringApplication.run(VulcanoHealthCheckMonitorApplication.class, args);
 	}
+
 }

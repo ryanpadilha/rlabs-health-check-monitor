@@ -46,14 +46,14 @@ public class Developer implements Serializable {
 	@Column(name = "active")
 	private boolean active;
 
-	@NotBlank(message = "#{developer.name.blank}")
+	@NotBlank(message = "{developer.name.blank}")
 	@Size(min = 1, max = 150)
 	@Column(name = "name")
 	private String name;
 
-	@NotEmpty(message = "#{developer.email.empty}")
+	@NotEmpty(message = "{developer.email.empty}")
 	@Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\." + "[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
-			+ "(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message = "Invalid email.")
+			+ "(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message = "{invalid.email}")
 	@Column(name = "email")
 	private String email;
 
