@@ -51,7 +51,7 @@ public class Organization implements Serializable {
 
 	@NotBlank(message = "{organization.alias.blank}")
 	@Size(min = 1, max = 50)
-	@Column(name = "alias")
+	@Column(name = "alias", unique = true)
 	private String alias;
 
 	public Long getId() {
