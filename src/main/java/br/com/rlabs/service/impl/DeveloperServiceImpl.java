@@ -42,14 +42,36 @@ public class DeveloperServiceImpl implements DeveloperService {
 
 	@Transactional
 	@Override
-	public Developer insert(Developer developer) {
-		return repository.save(developer);
+	public Developer persist(Developer developer) {
+		Developer persisted = null;
+
+		if (null == developer.getInternal()) {
+			persisted = repository.save(developer);
+		} else {
+			persisted = update(developer.getInternal(), developer);
+		}
+
+		return persisted;
 	}
 
 	@Transactional
 	@Override
 	public Developer update(Long id, Developer developer) {
 		Developer persisted = repository.getOne(id);
+
+		if (null == persisted)
+			return null;
+
+		// just update name
+		persisted.setName(developer.getName());
+
+		return repository.save(persisted);
+	}
+
+	@Transactional
+	@Override
+	public Developer update(UUID internal, Developer developer) {
+		Developer persisted = repository.findByInternal(internal);
 
 		if (null == persisted)
 			return null;
@@ -70,20 +92,6 @@ public class DeveloperServiceImpl implements DeveloperService {
 
 		repository.delete(persisted);
 		return persisted;
-	}
-
-	@Transactional
-	@Override
-	public Developer update(UUID internal, Developer developer) {
-		Developer persisted = repository.findByInternal(internal);
-
-		if (null == persisted)
-			return null;
-
-		// just update name
-		persisted.setName(developer.getName());
-
-		return repository.save(persisted);
 	}
 
 	@Transactional

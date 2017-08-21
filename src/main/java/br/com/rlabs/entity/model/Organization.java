@@ -9,11 +9,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Type;
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  * Organization class.
@@ -41,9 +44,13 @@ public class Organization implements Serializable {
 	@Column(name = "active")
 	private boolean active;
 
+	@NotBlank(message = "{organization.name.blank}")
+	@Size(min = 5, max = 150)
 	@Column(name = "name")
 	private String name;
 
+	@NotBlank(message = "{organization.alias.blank}")
+	@Size(min = 1, max = 50)
 	@Column(name = "alias")
 	private String alias;
 
@@ -93,6 +100,13 @@ public class Organization implements Serializable {
 
 	public void setAlias(String alias) {
 		this.alias = alias;
+	}
+
+	@PrePersist
+	protected void onInsert() {
+		this.internal = UUID.randomUUID();
+		this.created = new Date();
+		this.active = true;
 	}
 
 }

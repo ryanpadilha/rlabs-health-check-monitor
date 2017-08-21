@@ -5,7 +5,6 @@ import java.util.UUID;
 
 import javax.validation.Valid;
 
-import org.hibernate.cfg.NotYetImplementedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -66,24 +65,16 @@ public class DeveloperControllerImpl implements DeveloperController {
 
 	@Override
 	@RequestMapping(value = { "", "/" }, method = RequestMethod.POST)
-	public ModelAndView insert(@Valid Developer developer, BindingResult result) {
+	public ModelAndView persist(@Valid Developer developer, BindingResult result) {
 		String htmlview = FORM;
 
 		if (!result.hasErrors()) {
-			service.insert(developer);
+			service.persist(developer);
 			htmlview = REDIRECT;
-		} else {
-
 		}
 
 		final ModelAndView modelAndView = new ModelAndView(htmlview);
 		return modelAndView;
-	}
-
-	@Override
-	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public ModelAndView update(UUID internal, Developer developer) {
-		throw new NotYetImplementedException();
 	}
 
 	@Override

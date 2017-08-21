@@ -7,6 +7,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.rlabs.entity.model.Developer;
 
+/**
+ * Developer Controller WEB-MVC Interface.
+ * 
+ * @author Ryan Padilha <ryan.padilha@gmail.com>
+ * @since 0.0.1
+ *
+ */
 public interface DeveloperController {
 
 	ModelAndView form();
@@ -15,9 +22,7 @@ public interface DeveloperController {
 
 	ModelAndView getByInternal(UUID internal);
 
-	ModelAndView insert(Developer developer, BindingResult result);
-
-	ModelAndView update(UUID internal, Developer developer);
+	ModelAndView persist(Developer developer, BindingResult result);
 
 	ModelAndView delete(UUID internal);
 }

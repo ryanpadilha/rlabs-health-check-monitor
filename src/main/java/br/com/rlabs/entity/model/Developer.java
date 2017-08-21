@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -56,6 +58,10 @@ public class Developer implements Serializable {
 			+ "(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message = "{invalid.email}")
 	@Column(name = "email")
 	private String email;
+
+	@ManyToOne
+	@JoinColumn(name = "organization_id")
+	private Organization organization;
 
 	public Long getId() {
 		return id;
@@ -105,10 +111,19 @@ public class Developer implements Serializable {
 		this.email = email;
 	}
 
+	public Organization getOrganization() {
+		return organization;
+	}
+
+	public void setOrganization(Organization organization) {
+		this.organization = organization;
+	}
+
 	@PrePersist
 	protected void onInsert() {
 		this.internal = UUID.randomUUID();
 		this.created = new Date();
+		this.active = true;
 	}
 
 }
