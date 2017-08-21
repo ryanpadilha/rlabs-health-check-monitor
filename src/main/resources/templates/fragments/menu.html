@@ -33,7 +33,7 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
-        <li class="treeview"> <!-- active -->
+        <li class="treeview" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/configuration') ? 'active' : ''}">
           <a href="#">
             <i class="fa fa-dashboard"></i> <span>Configuration</span>
             <span class="pull-right-container">
@@ -42,8 +42,12 @@
           </a>
           <ul class="treeview-menu">
           	<!-- class="active" -->
-            <li><a th:href="@{/configuration/organization}"><i class="fa fa-circle-o"></i> Organization</a></li>
-            <li><a th:href="@{/configuration/developer}"><i class="fa fa-circle-o"></i> Developer</a></li>
+            <li th:classappend="${#httpServletRequest.getRequestURI() == '/configuration/organization' ? 'active' : ''}">
+            	<a th:href="@{/configuration/organization}"><i class="fa fa-circle-o"></i> Organization</a>
+            </li>
+            <li th:classappend="${#httpServletRequest.getRequestURI() == '/configuration/developer' ? 'active' : ''}">
+            	<a th:href="@{/configuration/developer}"><i class="fa fa-circle-o"></i> Developer</a>
+            </li>
           </ul>
         </li>
         

@@ -17,11 +17,13 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.rlabs.controller.DeveloperController;
 import br.com.rlabs.entity.model.Developer;
 import br.com.rlabs.service.DeveloperService;
+import br.com.rlabs.service.OrganizationService;
 
 /**
  * The Developer WEB-MVC Controller.
  * 
- * @author ryan
+ * @author Ryan Padilha <ryan.padilha@gmail.com>
+ * @since 0.0.1
  *
  */
 @Controller
@@ -30,6 +32,9 @@ public class DeveloperControllerImpl implements DeveloperController {
 
 	@Autowired
 	private DeveloperService service;
+
+	@Autowired
+	private OrganizationService organizationService;
 
 	private static final String FORM = "modules/configuration/developer-form";
 	private static final String FORM_LIST = "modules/configuration/developer-list";
@@ -40,6 +45,7 @@ public class DeveloperControllerImpl implements DeveloperController {
 	public ModelAndView form() {
 		final ModelAndView modelAndView = new ModelAndView(FORM);
 		modelAndView.addObject(new Developer());
+		modelAndView.addObject("organizations", organizationService.list());
 		return modelAndView;
 	}
 
@@ -59,6 +65,7 @@ public class DeveloperControllerImpl implements DeveloperController {
 		final ModelAndView modelAndView = new ModelAndView(FORM);
 		Developer developer = service.getByInternal(internal);
 		modelAndView.addObject("developer", developer);
+		modelAndView.addObject("organizations", organizationService.list());
 
 		return modelAndView;
 	}

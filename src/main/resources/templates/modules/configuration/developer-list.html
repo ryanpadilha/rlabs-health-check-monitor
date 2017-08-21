@@ -106,6 +106,7 @@
                   <th>Name</th>
                   <th>E-mail</th>
                   <th>Status</th>
+                  <th>Organization</th>
                   <th class="text-center footable-visible footable-last-column">Edit</th>
                   <th class="text-center footable-visible footable-last-column">Delete</th>
                 </tr>
@@ -115,6 +116,7 @@
                 	<td th:text="${developer.name}"></td>
                 	<td th:text="${developer.email}"></td>
                 	<td th:text="${developer.active} ? 'active' : 'deactive'"></td>
+                	<td th:text="${developer.organization.name}"></td>
                 	<td class="text-center footable-visible footable-last-column">
                 		<a th:href="@{'/configuration/developer/form/' + ${developer.internal}}">
                 			<button type="button" class="btn bg-navy btn-xs"><i class="fa fa-edit"></i></button>
