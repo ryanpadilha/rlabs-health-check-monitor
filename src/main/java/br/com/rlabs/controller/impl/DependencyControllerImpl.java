@@ -17,10 +17,11 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.rlabs.controller.DependencyController;
 import br.com.rlabs.entity.model.Dependency;
 import br.com.rlabs.service.DependencyService;
+import br.com.rlabs.service.ProductService;
 
 /**
  * The Dependency WEB-MVC Controller.
- * 
+ *
  * @author Ryan Padilha <ryan.padilha@gmail.com>
  * @since 0.0.1
  *
@@ -32,6 +33,9 @@ public class DependencyControllerImpl implements DependencyController {
 	@Autowired
 	private DependencyService service;
 
+	@Autowired
+	private ProductService productService;
+
 	private static final String FORM = "modules/platform/dependency-form";
 	private static final String FORM_LIST = "modules/platform/dependency-list";
 	private static final String REDIRECT = "redirect:/platform/dependency";
@@ -41,6 +45,7 @@ public class DependencyControllerImpl implements DependencyController {
 	public ModelAndView form() {
 		final ModelAndView modelAndView = new ModelAndView(FORM);
 		modelAndView.addObject("dependency", new Dependency());
+		modelAndView.addObject("products", productService.list());
 
 		return modelAndView;
 	}
@@ -60,6 +65,7 @@ public class DependencyControllerImpl implements DependencyController {
 		final ModelAndView modelAndView = new ModelAndView(FORM);
 		Dependency dependency = service.getByInternal(internal);
 		modelAndView.addObject("dependency", dependency);
+		modelAndView.addObject("products", productService.list());
 
 		return modelAndView;
 	}
@@ -75,6 +81,7 @@ public class DependencyControllerImpl implements DependencyController {
 		}
 
 		final ModelAndView modelAndView = new ModelAndView(htmlView);
+		modelAndView.addObject("products", productService.list());
 		return modelAndView;
 	}
 

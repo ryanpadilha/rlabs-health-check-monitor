@@ -7,33 +7,38 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Vulcano Health Check Monitor | Dependency</title>
-  
+
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  
+
   <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" 
+  <link rel="stylesheet"
   	href="../../../static/bower_components/bootstrap/dist/css/bootstrap.min.css"
   	th:href="@{/bower_components/bootstrap/dist/css/bootstrap.min.css}">
-  
+
   <!-- Font Awesome -->
-  <link rel="stylesheet" 
+  <link rel="stylesheet"
   	href="../../../static/bower_components/font-awesome/css/font-awesome.min.css"
   	th:href="@{/bower_components/font-awesome/css/font-awesome.min.css}">
-  
+
   <!-- Ionicons -->
-  <link rel="stylesheet" 
+  <link rel="stylesheet"
   	href="../../../static/bower_components/Ionicons/css/ionicons.min.css"
   	th:href="@{/bower_components/Ionicons/css/ionicons.min.css}">
-  
+
+  <!-- Select2 -->
+  <link rel="stylesheet"
+  	href="../../../static/bower_components/select2/dist/css/select2.min.css"
+  	th:href="@{/bower_components/select2/dist/css/select2.min.css}">
+
   <!-- Theme style -->
-  <link rel="stylesheet" 
+  <link rel="stylesheet"
   	href="../../../static/dist/css/AdminLTE.min.css"
   	th:href="@{/dist/css/AdminLTE.min.css}">
-  
+
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" 
+  <link rel="stylesheet"
   	href="../../../static/dist/css/skins/_all-skins.min.css"
   	th:href="@{/dist/css/skins/_all-skins.min.css}">
 
@@ -45,7 +50,7 @@
   <![endif]-->
 
   <!-- Google Font -->
-  <link rel="stylesheet" 
+  <link rel="stylesheet"
   	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -57,7 +62,7 @@
 
   <!-- Left side column. contains the sidebar -->
   <div th:replace="fragments/menu :: menu"></div>
-  
+
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -72,9 +77,9 @@
         <li class="active">Dependency</li>
       </ol>
     </section>
-    
+
     <!-- message-processor -->
-    <!-- 
+    <!--
     <div th:replace="fragments/message-processor :: message-processor"></div>
 -->
     <!-- Main content -->
@@ -93,7 +98,7 @@
               <i class="fa fa-times"></i></button>
           </div>
         </div>
-        
+
         <form role="form" method="POST" th:object="${dependency}" th:action="@{/platform/dependency}">
         	<div class="box-body">
           		<div class="form-group">
@@ -119,7 +124,18 @@
                   <input type="text" class="form-control" id="hostname" required="required" th:field="*{hostname}">
                   <span class="text-red" th:if="${#fields.hasErrors('hostname')}" th:errors="*{hostname}"><i class="fa fa-times-circle-o"></i>Error</span>
                 </div>
-        	</div> 
+                <div class="form-group">
+                  <label for="complement">Complement</label>
+                  <input type="text" class="form-control" id="complement" th:field="*{complement}">
+                  <span class="text-red" th:if="${#fields.hasErrors('complement')}" th:errors="*{complement}"><i class="fa fa-times-circle-o"></i>Error</span>
+                </div>
+                <div class="form-group">
+                  <label>Products</label>
+                  <select class="form-control select2" multiple="multiple" data-placeholder="Select a Product" th:field="*{products}" style="width: 100%;">
+                    <option th:each="product : ${products}" th:value="${product.id}" th:text="${product.name}" />
+                  </select>
+                </div>
+        	</div>
         	<div class="box-footer">
         		<input type="hidden" id="internal" th:field="*{internal}" />
                 <button type="submit" class="btn btn-primary pull-right" style="width: 100px;">Submit</button>
@@ -140,43 +156,50 @@
   <div th:replace="fragments/footer :: footer"></div>
 
   <!-- Control Sidebar -->
-  <div th:replace="fragments/control-side :: control-side"></div> 
+  <div th:replace="fragments/control-side :: control-side"></div>
 </div>
 <!-- ./wrapper -->
 
 <!-- jQuery 3 -->
-<script 
+<script
 	src="../../../static/bower_components/jquery/dist/jquery.min.js"
 	th:src="@{/bower_components/jquery/dist/jquery.min.js}"></script>
 
 <!-- Bootstrap 3.3.7 -->
-<script 
+<script
 	src="../../../static/bower_components/bootstrap/dist/js/bootstrap.min.js"
 	th:src="@{/bower_components/bootstrap/dist/js/bootstrap.min.js}"></script>
 
+<!-- Select2 -->
+<script src="../../../static/bower_components/select2/dist/js/select2.full.min.js"
+	th:src="@{/bower_components/select2/dist/js/select2.full.min.js}"></script>
+
 <!-- SlimScroll -->
-<script 
+<script
 	src="../../../static/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"
 	th:src="@{/bower_components/jquery-slimscroll/jquery.slimscroll.min.js}"></script>
 
 <!-- FastClick -->
-<script 
+<script
 	src="../../../static/bower_components/fastclick/lib/fastclick.js"
 	th:src="@{/bower_components/fastclick/lib/fastclick.js}"></script>
 
 <!-- AdminLTE App -->
-<script 
+<script
 	src="../../../static/dist/js/adminlte.min.js"
 	th:src="@{/dist/js/adminlte.min.js}"></script>
 
 <!-- AdminLTE for demo purposes -->
-<script 
+<script
 	src="../../../static/dist/js/demo.js"
 	th:src="@{/dist/js/demo.js}"></script>
 <script>
   $(document).ready(function () {
     $('.sidebar-menu').tree()
-  })
+  });
+
+  $('.select2').select2();
+
 </script>
 </body>
 </html>

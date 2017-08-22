@@ -14,7 +14,7 @@ import br.com.rlabs.service.DependencyService;
 
 /**
  * Dependency Service Implementation.
- * 
+ *
  * @author Ryan Padilha <ryan.padilha@gmail.com>
  * @since 0.0.1
  *
@@ -62,8 +62,7 @@ public class DependencyServiceImpl implements DependencyService {
 		if (null == persisted)
 			return null;
 
-		//
-
+		updateFields(persisted, dependency);
 		return repository.save(persisted);
 	}
 
@@ -75,9 +74,16 @@ public class DependencyServiceImpl implements DependencyService {
 		if (null == persisted)
 			return null;
 
-		//
-
+		updateFields(persisted, dependency);
 		return repository.save(persisted);
+	}
+
+	private void updateFields(Dependency persisted, Dependency dependency) {
+		persisted.setName(dependency.getName());
+		persisted.setType(dependency.getType());
+		persisted.setVersion(dependency.getVersion());
+		persisted.setHostname(dependency.getHostname());
+		persisted.setProducts(dependency.getProducts());
 	}
 
 	@Transactional

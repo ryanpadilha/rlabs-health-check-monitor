@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml"  
-	xmlns:th="http://www.thymeleaf.org" 
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
     xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head></head>
@@ -35,13 +35,12 @@
         <li class="header">MAIN NAVIGATION</li>
         <li class="treeview" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/configuration') ? 'active' : ''}">
           <a href="#">
-            <i class="fa fa-dashboard"></i> <span>Configuration</span>
+            <i class="fa fa-bars"></i> <span>Configuration</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-          	<!-- class="active" -->
             <li th:classappend="${#httpServletRequest.getRequestURI().startsWith('/configuration/organization') ? 'active' : ''}">
             	<a th:href="@{/configuration/organization}"><i class="fa fa-circle-o"></i> Organization</a>
             </li>
@@ -52,20 +51,22 @@
         </li>
         <li class="treeview" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/platform') ? 'active' : ''}">
           <a href="#">
-            <i class="fa fa-dashboard"></i> <span>Platform</span>
+            <i class="fa fa-qrcode"></i> <span>Platform</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-          	<!-- class="active" -->
             <li th:classappend="${#httpServletRequest.getRequestURI().startsWith('/platform/product') ? 'active' : ''}">
             	<a th:href="@{/platform/product}"><i class="fa fa-circle-o"></i> Product</a>
             </li>
+            <li th:classappend="${#httpServletRequest.getRequestURI().startsWith('/platform/dependency') ? 'active' : ''}">
+            	<a th:href="@{/platform/dependency}"><i class="fa fa-circle-o"></i> Dependency</a>
+            </li>
           </ul>
         </li>
-        
-        <!-- 
+
+        <!--
         <li class="treeview">
           <a href="#">
             <i class="fa fa-files-o"></i>

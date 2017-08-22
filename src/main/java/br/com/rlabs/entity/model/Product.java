@@ -26,7 +26,7 @@ import br.com.rlabs.commons.Environment;
 
 /**
  * Product class.
- * 
+ *
  * @author Ryan Padilha <ryan.padilha@gmail.com>
  * @since 0.0.1
  *
@@ -186,4 +186,10 @@ public class Product implements Serializable {
 		this.created = new Date();
 		this.active = true;
 	}
+
+	@Override
+	public String toString() {
+		return name;
+	}
+
 }

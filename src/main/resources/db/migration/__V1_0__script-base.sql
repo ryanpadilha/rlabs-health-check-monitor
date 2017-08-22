@@ -53,9 +53,18 @@ create table vl_dependency (
 	name text not null,
 	type text not null,
 	version text not null,
-	hostname text not null
+	hostname text not null,
+	complement text
 );
 
+-- table: product_dependency
+create table vl_product_dependency (
+	product_id bigint not null,
+	dependency_id bigint not null
+);
 
+alter table vl_product_dependency add constraint pk_product_dependency primary key (product_id, dependency_id);
+alter table vl_product_dependency add constraint fk_product foreign key (product_id) references vl_product(id);
+alter table vl_product_dependency add constraint fk_dependency foreign key (dependency_id) references vl_dependency(id);
 
 
