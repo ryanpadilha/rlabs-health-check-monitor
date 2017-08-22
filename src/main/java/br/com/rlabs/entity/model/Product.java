@@ -6,6 +6,8 @@ import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,6 +21,8 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotBlank;
+
+import br.com.rlabs.commons.Environment;
 
 /**
  * Product class.
@@ -56,9 +60,10 @@ public class Product implements Serializable {
 	@Column(name = "description")
 	private String description;
 
-	@NotBlank(message = "{product.environment.blank}")
+	@Enumerated(EnumType.STRING)
+	// @NotBlank(message = "{product.environment.blank}")
 	@Column(name = "environment")
-	private String environment;
+	private Environment environment;
 
 	@NotBlank(message = "{product.version.blank}")
 	@Column(name = "version")
@@ -127,11 +132,11 @@ public class Product implements Serializable {
 		this.description = description;
 	}
 
-	public String getEnvironment() {
+	public Environment getEnvironment() {
 		return environment;
 	}
 
-	public void setEnvironment(String environment) {
+	public void setEnvironment(Environment environment) {
 		this.environment = environment;
 	}
 

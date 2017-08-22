@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.rlabs.controller.ProductController;
 import br.com.rlabs.entity.model.Product;
+import br.com.rlabs.service.OrganizationService;
 import br.com.rlabs.service.ProductService;
 
 /**
@@ -32,6 +33,9 @@ public class ProductControllerImpl implements ProductController {
 	@Autowired
 	private ProductService service;
 
+	@Autowired
+	private OrganizationService organizationService;
+
 	private static final String FORM = "modules/platform/product-form";
 	private static final String FORM_LIST = "modules/platform/product-list";
 	private static final String REDIRECT = "redirect:/platform/product";
@@ -41,6 +45,8 @@ public class ProductControllerImpl implements ProductController {
 	public ModelAndView form() {
 		final ModelAndView modelAndView = new ModelAndView(FORM);
 		modelAndView.addObject(new Product());
+		modelAndView.addObject("organizations", organizationService.list());
+
 		return modelAndView;
 	}
 
@@ -59,6 +65,7 @@ public class ProductControllerImpl implements ProductController {
 		final ModelAndView modelAndView = new ModelAndView(FORM);
 		Product product = service.getByInternal(internal);
 		modelAndView.addObject("product", product);
+		modelAndView.addObject("organizations", organizationService.list());
 
 		return modelAndView;
 	}
@@ -74,6 +81,7 @@ public class ProductControllerImpl implements ProductController {
 		}
 
 		final ModelAndView modelAndView = new ModelAndView(htmlView);
+		modelAndView.addObject("organizations", organizationService.list());
 		return modelAndView;
 	}
 

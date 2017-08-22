@@ -108,7 +108,14 @@
                 </div>
                 <div class="form-group">
                   <label for="environment">Environment</label>
+                  <select id="environment" class="form-control" th:field="*{environment}">
+                  	<option th:each="environment : ${T(br.com.rlabs.commons.Environment).values()}" th:value="${environment}" th:text="${environment}">
+                  	</option>
+                  </select>
+                                 
+                  <!--  
                   <input type="text" class="form-control" id="environment" required="required" th:field="*{environment}">
+                  -->
                   <span class="text-red" th:if="${#fields.hasErrors('environment')}" th:errors="*{environment}"><i class="fa fa-times-circle-o"></i>Error</span>
                 </div>
                 <div class="form-group">
@@ -128,7 +135,7 @@
                 </div>
                 <div class="form-group">
                   <label for="projectPage">Project Page</label>
-                  <input type="text" class="form-control" id="projectPage" required="required" th:field="*{projectPage}">
+                  <input type="text" class="form-control" id="projectPage" th:field="*{projectPage}">
                   <span class="text-red" th:if="${#fields.hasErrors('projectPage')}" th:errors="*{projectPage}"><i class="fa fa-times-circle-o"></i>Error</span>
                 </div> 
                 <div class="form-group">

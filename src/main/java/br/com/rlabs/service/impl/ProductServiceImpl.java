@@ -62,8 +62,7 @@ public class ProductServiceImpl implements ProductService {
 		if (null == persisted)
 			return null;
 
-		//
-
+		updateFields(persisted, product);
 		return repository.save(persisted);
 	}
 
@@ -75,9 +74,25 @@ public class ProductServiceImpl implements ProductService {
 		if (null == persisted)
 			return null;
 
-		//
-
+		updateFields(persisted, product);
 		return repository.save(persisted);
+	}
+
+	/**
+	 * Update fields
+	 * 
+	 * @param persisted
+	 * @param product
+	 */
+	private void updateFields(Product persisted, Product product) {
+		persisted.setName(product.getName());
+		persisted.setDescription(product.getDescription());
+		persisted.setEnvironment(product.getEnvironment());
+		persisted.setVersion(product.getVersion());
+		persisted.setHostname(product.getHostname());
+		persisted.setProjectRepository(product.getProjectRepository());
+		persisted.setProjectPage(product.getProjectPage());
+		persisted.setOrganization(product.getOrganization());
 	}
 
 	@Transactional

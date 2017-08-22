@@ -81,6 +81,7 @@ public class DeveloperControllerImpl implements DeveloperController {
 		}
 
 		final ModelAndView modelAndView = new ModelAndView(htmlview);
+		modelAndView.addObject("organizations", organizationService.list());
 		return modelAndView;
 	}
 
