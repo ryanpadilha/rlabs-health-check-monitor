@@ -1,24 +1,23 @@
 package br.com.rlabs.commons;
 
 /**
- * Environment Enumeration.
+ * Status of the service.
  *
  * @author Ryan Padilha <ryan.padilha@gmail.com>
  * @since 0.0.1
  *
  */
-public enum Environment {
+public enum Status {
 
-	DEVELOPMENT("development"), STAGE("stage"), PRODUCTION("production");
+	UNKNOWN("UNKNOWN"), UP("UP"), DOWN("DOWN"), OUT_OF_SERVICE("OUT_OF_SERVICE");
 
 	private String description;
 
-	Environment(String value) {
-		this.description = value;
+	Status(String description) {
+		this.description = description;
 	}
 
 	public String getDescription() {
 		return description;
 	}
-
 }

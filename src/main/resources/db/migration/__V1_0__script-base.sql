@@ -67,4 +67,18 @@ alter table vl_product_dependency add constraint pk_product_dependency primary k
 alter table vl_product_dependency add constraint fk_product foreign key (product_id) references vl_product(id);
 alter table vl_product_dependency add constraint fk_dependency foreign key (dependency_id) references vl_dependency(id);
 
+-- table: vl_status_details
+create table vl_status_details (
+	id bigserial not null primary key,
+	internal uuid not null unique default uuid_generate_v4(),
+	created timestamp not null default now(),
+	description text not null,
+	result text not null,
+	details text,
+	dependency_id bigint not null
+);
+
+alter table vl_status_details add constraint fk_dependency_status foreign key (dependency_id) references vl_dependency(id);
+
+
 
