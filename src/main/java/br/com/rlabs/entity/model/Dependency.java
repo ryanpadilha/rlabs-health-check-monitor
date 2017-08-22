@@ -1,16 +1,26 @@
 package br.com.rlabs.entity.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Type;
+import org.hibernate.validator.constraints.NotBlank;
+
+import br.com.rlabs.commons.DependencyType;
 
 /**
  * Dependency class.
@@ -32,7 +42,86 @@ public class Dependency implements Serializable {
 	@Type(type = "pg-uuid")
 	private UUID internal;
 
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date created;
+
+	@NotBlank(message = "{dependency.name.blank}")
+	@Size(min = 1, max = 200)
 	@Column(name = "name")
 	private String name;
+
+	@Enumerated(EnumType.STRING)
+	@Column(name = "type")
+	private DependencyType type;
+
+	@NotBlank(message = "{dependency.version.blank}")
+	@Column(name = "version")
+	private String version;
+
+	@NotBlank(message = "{dependency.hostname.blank}")
+	@Column(name = "hostname")
+	private String hostname;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public UUID getInternal() {
+		return internal;
+	}
+
+	public void setInternal(UUID internal) {
+		this.internal = internal;
+	}
+
+	public Date getCreated() {
+		return created;
+	}
+
+	public void setCreated(Date created) {
+		this.created = created;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public DependencyType getType() {
+		return type;
+	}
+
+	public void setType(DependencyType type) {
+		this.type = type;
+	}
+
+	public String getVersion() {
+		return version;
+	}
+
+	public void setVersion(String version) {
+		this.version = version;
+	}
+
+	public String getHostname() {
+		return hostname;
+	}
+
+	public void setHostname(String hostname) {
+		this.hostname = hostname;
+	}
+
+	@PrePersist
+	protected void onInsert() {
+		this.internal = UUID.randomUUID();
+		this.created = new Date();
+	}
 
 }

@@ -6,7 +6,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Vulcano Health Check Monitor | Product</title>
+  <title>Vulcano Health Check Monitor | Dependency</title>
   
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -63,13 +63,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Product
+        Dependency of Product
         <small></small>
       </h1>
       <ol class="breadcrumb">
         <li><a th:href="@{/}"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="#">Configuration</a></li>
-        <li class="active">Product</li>
+        <li class="active">Dependency</li>
       </ol>
     </section>
     
@@ -94,7 +94,7 @@
           </div>
         </div>
         
-        <form role="form" method="POST" th:object="${product}" th:action="@{/platform/product}">
+        <form role="form" method="POST" th:object="${dependency}" th:action="@{/platform/dependency}">
         	<div class="box-body">
           		<div class="form-group">
                   <label for="name">Name</label>
@@ -102,17 +102,12 @@
                   <span class="text-red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"><i class="fa fa-times-circle-o"></i>Error</span>
                 </div>
                 <div class="form-group">
-                  <label for="description">Description</label>
-                  <input type="text" class="form-control" id="description" required="required" th:field="*{description}">
-                  <span class="text-red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"><i class="fa fa-times-circle-o"></i>Error</span>
-                </div>
-                <div class="form-group">
-                  <label for="environment">Environment</label>
-                  <select id="environment" class="form-control" th:field="*{environment}">
-                  	<option th:each="environment : ${T(br.com.rlabs.commons.Environment).values()}" th:value="${environment}" th:text="${environment}">
+                  <label for="type">Type</label>
+                  <select id="type" class="form-control" th:field="*{type}">
+                  	<option th:each="type : ${T(br.com.rlabs.commons.DependencyType).values()}" th:value="${type}" th:text="${type}">
                   	</option>
                   </select>
-                  <span class="text-red" th:if="${#fields.hasErrors('environment')}" th:errors="*{environment}"><i class="fa fa-times-circle-o"></i>Error</span>
+                  <span class="text-red" th:if="${#fields.hasErrors('type')}" th:errors="*{type}"><i class="fa fa-times-circle-o"></i>Error</span>
                 </div>
                 <div class="form-group">
                   <label for="version">Version</label>
@@ -124,27 +119,11 @@
                   <input type="text" class="form-control" id="hostname" required="required" th:field="*{hostname}">
                   <span class="text-red" th:if="${#fields.hasErrors('hostname')}" th:errors="*{hostname}"><i class="fa fa-times-circle-o"></i>Error</span>
                 </div>
-                <div class="form-group">
-                  <label for="projectRepository">Project Repository</label>
-                  <input type="text" class="form-control" id="projectRepository" required="required" th:field="*{projectRepository}">
-                  <span class="text-red" th:if="${#fields.hasErrors('projectRepository')}" th:errors="*{projectRepository}"><i class="fa fa-times-circle-o"></i>Error</span>
-                </div>
-                <div class="form-group">
-                  <label for="projectPage">Project Page</label>
-                  <input type="text" class="form-control" id="projectPage" th:field="*{projectPage}">
-                  <span class="text-red" th:if="${#fields.hasErrors('projectPage')}" th:errors="*{projectPage}"><i class="fa fa-times-circle-o"></i>Error</span>
-                </div> 
-                <div class="form-group">
-                	<label for="organization">Organization</label>
-                	<select id="organization" class="form-control" th:field="*{organization}">
-					<option th:each="organization : ${organizations}" th:value="${organization.id}" th:text="${organization.name}" />
-					</select>
-                </div>
         	</div> 
         	<div class="box-footer">
         		<input type="hidden" id="internal" th:field="*{internal}" />
                 <button type="submit" class="btn btn-primary pull-right" style="width: 100px;">Submit</button>
-                <a th:href="@{/platform/product}">
+                <a th:href="@{/platform/dependency}">
                 	<button type="button" class="btn btn-default pull-right" style="width: 100px; margin-right: 5px;">Back</button>
                 </a>
             </div>

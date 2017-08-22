@@ -51,10 +51,11 @@ create table vl_dependency (
 	internal uuid not null unique default uuid_generate_v4(),
 	created timestamp not null default now(),
 	name text not null,
-	
-	product_id bigint not null
+	type text not null,
+	version text not null,
+	hostname text not null
 );
 
-alter table vl_dependency add constraint fk_dependecy_product foreign key (product_id) references vl_product(id);
+
 
 
