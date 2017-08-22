@@ -21,7 +21,7 @@ import br.com.rlabs.service.ProductService;
 
 /**
  * The Product WEB-MVC Controller.
- * 
+ *
  * @author Ryan Padilha <ryan.padilha@gmail.com>
  * @since 0.0.1
  *
@@ -39,6 +39,7 @@ public class ProductControllerImpl implements ProductController {
 	private static final String FORM = "modules/platform/product-form";
 	private static final String FORM_LIST = "modules/platform/product-list";
 	private static final String REDIRECT = "redirect:/platform/product";
+	private static final String PRODUCT_DETAILS = "modules/platform/product-details";
 
 	@Override
 	@RequestMapping(value = "/form", method = RequestMethod.GET)
@@ -90,6 +91,16 @@ public class ProductControllerImpl implements ProductController {
 	public ModelAndView delete(@ModelAttribute("internal") UUID internal) {
 		final ModelAndView modelAndView = new ModelAndView(REDIRECT);
 		service.delete(internal);
+
+		return modelAndView;
+	}
+
+	@Override
+	@RequestMapping(value = "/{internal}/details", method = RequestMethod.GET)
+	public ModelAndView details(@PathVariable("internal") UUID internal) {
+		final ModelAndView modelAndView = new ModelAndView(PRODUCT_DETAILS);
+		Product product = service.getByInternal(internal);
+		modelAndView.addObject("product", product);
 
 		return modelAndView;
 	}

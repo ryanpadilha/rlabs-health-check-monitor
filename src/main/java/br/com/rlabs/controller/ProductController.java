@@ -9,7 +9,7 @@ import br.com.rlabs.entity.model.Product;
 
 /**
  * Product Controller WEB-MVC Interface.
- * 
+ *
  * @author Ryan Padilha <ryan.padilha@gmail.com>
  * @since 0.0.1
  *
@@ -25,4 +25,6 @@ public interface ProductController {
 	ModelAndView persist(Product product, BindingResult result);
 
 	ModelAndView delete(UUID internal);
+
+	ModelAndView details(UUID internal);
 }
