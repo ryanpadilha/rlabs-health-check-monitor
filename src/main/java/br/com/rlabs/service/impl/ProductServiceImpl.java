@@ -14,7 +14,7 @@ import br.com.rlabs.service.ProductService;
 
 /**
  * Product Service Implementation.
- * 
+ *
  * @author Ryan Padilha <ryan.padilha@gmail.com>
  * @since 0.0.1
  *
@@ -57,34 +57,25 @@ public class ProductServiceImpl implements ProductService {
 	@Transactional
 	@Override
 	public Product update(Long id, Product product) {
-		Product persisted = repository.getOne(id);
-
-		if (null == persisted)
-			return null;
-
-		updateFields(persisted, product);
-		return repository.save(persisted);
+		return updateFields(repository.getOne(id), product);
 	}
 
 	@Transactional
 	@Override
 	public Product update(UUID internal, Product product) {
-		Product persisted = repository.findByInternal(internal);
-
-		if (null == persisted)
-			return null;
-
-		updateFields(persisted, product);
-		return repository.save(persisted);
+		return updateFields(repository.findByInternal(internal), product);
 	}
 
 	/**
 	 * Update fields
-	 * 
+	 *
 	 * @param persisted
 	 * @param product
 	 */
-	private void updateFields(Product persisted, Product product) {
+	private Product updateFields(Product persisted, Product product) {
+		if (null == persisted)
+			return null;
+
 		persisted.setName(product.getName());
 		persisted.setDescription(product.getDescription());
 		persisted.setEnvironment(product.getEnvironment());
@@ -92,31 +83,29 @@ public class ProductServiceImpl implements ProductService {
 		persisted.setHostname(product.getHostname());
 		persisted.setProjectRepository(product.getProjectRepository());
 		persisted.setProjectPage(product.getProjectPage());
+		persisted.setActive(product.isActive());
 		persisted.setOrganization(product.getOrganization());
+		return repository.save(persisted);
 	}
 
 	@Transactional
 	@Override
 	public Product delete(Long id) {
-		Product persisted = repository.getOne(id);
-
-		if (null == persisted)
-			return null;
-
-		repository.delete(persisted);
-		return persisted;
+		return delete(repository.getOne(id));
 	}
 
 	@Transactional
 	@Override
 	public Product delete(UUID internal) {
-		Product persisted = repository.findByInternal(internal);
+		return delete(repository.findByInternal(internal));
+	}
 
-		if (null == persisted)
+	private Product delete(Product entity) {
+		if (null == entity)
 			return null;
 
-		repository.delete(persisted);
-		return persisted;
+		repository.delete(entity);
+		return entity;
 	}
 
 }

@@ -57,57 +57,52 @@ public class DependencyServiceImpl implements DependencyService {
 	@Transactional
 	@Override
 	public Dependency update(Long id, Dependency dependency) {
-		Dependency persisted = repository.getOne(id);
-
-		if (null == persisted)
-			return null;
-
-		updateFields(persisted, dependency);
-		return repository.save(persisted);
+		return updateFields(repository.getOne(id), dependency);
 	}
 
 	@Transactional
 	@Override
 	public Dependency update(UUID internal, Dependency dependency) {
-		Dependency persisted = repository.findByInternal(internal);
+		return updateFields(repository.findByInternal(internal), dependency);
+	}
 
+	/**
+	 * Update fields
+	 *
+	 * @param persisted
+	 * @param dependency
+	 * @return
+	 */
+	private Dependency updateFields(Dependency persisted, Dependency dependency) {
 		if (null == persisted)
 			return null;
 
-		updateFields(persisted, dependency);
-		return repository.save(persisted);
-	}
-
-	private void updateFields(Dependency persisted, Dependency dependency) {
 		persisted.setName(dependency.getName());
 		persisted.setType(dependency.getType());
 		persisted.setVersion(dependency.getVersion());
 		persisted.setHostname(dependency.getHostname());
 		persisted.setProducts(dependency.getProducts());
+		return repository.save(persisted);
 	}
 
 	@Transactional
 	@Override
 	public Dependency delete(Long id) {
-		Dependency persisted = repository.getOne(id);
-
-		if (null == persisted)
-			return null;
-
-		repository.delete(persisted);
-		return persisted;
+		return delete(repository.getOne(id));
 	}
 
 	@Transactional
 	@Override
 	public Dependency delete(UUID internal) {
-		Dependency persisted = repository.findByInternal(internal);
+		return delete(repository.findByInternal(internal));
+	}
 
-		if (null == persisted)
+	private Dependency delete(Dependency entity) {
+		if (null == entity)
 			return null;
 
-		repository.delete(persisted);
-		return persisted;
+		repository.delete(entity);
+		return entity;
 	}
 
 }

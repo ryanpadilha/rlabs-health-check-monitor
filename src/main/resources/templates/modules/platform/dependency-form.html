@@ -78,12 +78,11 @@
       </ol>
     </section>
 
-    <!-- message-processor -->
-    <!--
-    <div th:replace="fragments/message-processor :: message-processor"></div>
--->
     <!-- Main content -->
     <section class="content">
+
+      <!-- message-processor -->
+      <div th:replace="fragments/message-processor :: message-processor"></div>
 
       <!-- Default box -->
       <div class="box box-primary">
@@ -99,7 +98,7 @@
           </div>
         </div>
 
-        <form role="form" method="POST" th:object="${dependency}" th:action="@{/platform/dependency}">
+        <form role="form" method="POST" th:object="${dependency}" th:action="@{/platform/dependency/form}">
         	<div class="box-body">
           		<div class="form-group">
                   <label for="name">Name</label>

@@ -24,7 +24,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * The developer class.
- * 
+ *
  * @author Ryan Padilha <ryan.padilha@gmail.com>
  * @since 0.0.1
  *
@@ -46,7 +46,7 @@ public class Developer implements Serializable {
 	private Date created;
 
 	@Column(name = "active")
-	private boolean active;
+	private boolean active = true;
 
 	@NotBlank(message = "{developer.name.blank}")
 	@Size(min = 1, max = 150)
@@ -56,7 +56,7 @@ public class Developer implements Serializable {
 	@NotEmpty(message = "{developer.email.empty}")
 	@Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\." + "[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
 			+ "(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message = "{invalid.email}")
-	@Column(name = "email")
+	@Column(name = "email", unique = true)
 	private String email;
 
 	@ManyToOne
@@ -123,7 +123,6 @@ public class Developer implements Serializable {
 	protected void onInsert() {
 		this.internal = UUID.randomUUID();
 		this.created = new Date();
-		this.active = true;
 	}
 
 }

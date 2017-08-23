@@ -2,16 +2,19 @@ package br.com.rlabs.entity.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
@@ -48,7 +51,7 @@ public class Product implements Serializable {
 	private Date created;
 
 	@Column(name = "active")
-	private boolean active;
+	private boolean active = true;
 
 	@NotBlank(message = "{product.name.blank}")
 	@Size(min = 1, max = 200)
@@ -61,7 +64,6 @@ public class Product implements Serializable {
 	private String description;
 
 	@Enumerated(EnumType.STRING)
-	// @NotBlank(message = "{product.environment.blank}")
 	@Column(name = "environment")
 	private Environment environment;
 
@@ -83,6 +85,9 @@ public class Product implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "organization_id")
 	private Organization organization;
+
+	@ManyToMany(mappedBy = "products", fetch = FetchType.LAZY)
+	private List<Dependency> dependencies;
 
 	public Long getId() {
 		return id;
@@ -180,11 +185,18 @@ public class Product implements Serializable {
 		this.organization = organization;
 	}
 
+	public List<Dependency> getDependencies() {
+		return dependencies;
+	}
+
+	public void setDependencies(List<Dependency> dependencies) {
+		this.dependencies = dependencies;
+	}
+
 	@PrePersist
 	protected void onInsert() {
 		this.internal = UUID.randomUUID();
 		this.created = new Date();
-		this.active = true;
 	}
 
 	@Override

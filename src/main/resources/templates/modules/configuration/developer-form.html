@@ -73,12 +73,11 @@
       </ol>
     </section>
 
-    <!-- message-processor -->
-    <!--
-    <div th:replace="fragments/message-processor :: message-processor"></div>
--->
     <!-- Main content -->
     <section class="content">
+
+      <!-- message-processor -->
+      <div th:replace="fragments/message-processor :: message-processor"></div>
 
       <!-- Default box -->
       <div class="box box-primary">
@@ -94,7 +93,7 @@
           </div>
         </div>
 
-        <form role="form" method="POST" th:object="${developer}" th:action="@{/configuration/developer}">
+        <form role="form" method="POST" th:object="${developer}" th:action="@{/configuration/developer/form}">
         	<div class="box-body">
           		<div class="form-group">
                   <label for="name">Name</label>
@@ -111,6 +110,13 @@
                 	<select id="organization" class="form-control" th:field="*{organization}">
 					  <option th:each="organization : ${organizations}" th:value="${organization.id}" th:text="${organization.name}" />
 					</select>
+                </div>
+                <div class="form-group">
+                  <label>Status</label>
+                  <select class="form-control" th:field="*{active}">
+                    <option th:value="true" th:text="Active"></option>
+                    <option th:value="false" th:text="Deactive"></option>
+                  </select>
                 </div>
         	</div>
         	<div class="box-footer">

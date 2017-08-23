@@ -20,7 +20,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 /**
  * Organization class.
- * 
+ *
  * @author Ryan Padilha <ryan.padilha@gmail.com>
  * @since 0.0.1
  *
@@ -42,7 +42,7 @@ public class Organization implements Serializable {
 	private Date created;
 
 	@Column(name = "active")
-	private boolean active;
+	private boolean active = true;
 
 	@NotBlank(message = "{organization.name.blank}")
 	@Size(min = 5, max = 150)
@@ -106,7 +106,6 @@ public class Organization implements Serializable {
 	protected void onInsert() {
 		this.internal = UUID.randomUUID();
 		this.created = new Date();
-		this.active = true;
 	}
 
 }
