@@ -74,15 +74,13 @@
     <section class="content">
 
       <div class="error-page" style="width: 800px;">
-        <h2 class="headline text-yellow" th:text="${status}"></h2>
+        <h2 class="headline text-yellow">404</h2> <!-- th:text="${status}" -->
 
         <div class="error-content">
-          <h3><i class="fa fa-warning text-yellow"></i>Oops! <span th:text="${error}"></span></h3>
+          <h3><i class="fa fa-warning text-yellow"></i> Oops! The requested page can not be found.</h3> <!-- <span th:text="${error}"></span> -->
 
           <p>
-            <strong>You experience a technical problem. We apologize :(</strong><br><br>
-            We're working hard to fix this problem. <br>
-            Please wait a few moments and try again to access the feature.
+            <br>Contact your administrator if you believe something should exist here.
           </p>
           <p>
             Meanwhile, you may <a th:href="@{/}">return to dashboard</a>.
