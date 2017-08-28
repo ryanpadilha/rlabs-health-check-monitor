@@ -96,35 +96,40 @@
         <form role="form" method="POST" th:object="${product}" th:action="@{/platform/product/form}">
         	<div class="box-body">
           		<div class="form-group">
-                  <label for="name">Name</label>
+                  <label for="name">Name *</label>
                   <input type="text" class="form-control" id="name" required="required" th:field="*{name}">
                   <span class="text-red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"><i class="fa fa-times-circle-o"></i>Error</span>
                 </div>
                 <div class="form-group">
-                  <label for="description">Description</label>
+                  <label for="description">Description *</label>
                   <input type="text" class="form-control" id="description" required="required" th:field="*{description}">
                   <span class="text-red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"><i class="fa fa-times-circle-o"></i>Error</span>
                 </div>
                 <div class="form-group">
+                  <label for="version">Artifact ID *</label>
+                  <input type="text" class="form-control" id="artifactId" required="required" th:field="*{artifactId}">
+                  <span class="text-red" th:if="${#fields.hasErrors('artifactId')}" th:errors="*{artifactId}"><i class="fa fa-times-circle-o"></i>Error</span>
+                </div>
+                <div class="form-group">
+                  <label for="version">Version *</label>
+                  <input type="text" class="form-control" id="version" required="required" th:field="*{version}">
+                  <span class="text-red" th:if="${#fields.hasErrors('version')}" th:errors="*{version}"><i class="fa fa-times-circle-o"></i>Error</span>
+                </div>
+                <div class="form-group">
+                  <label for="hostname">Hostname (health endpoint) *</label>
+                  <input type="text" class="form-control" id="hostname" required="required" th:field="*{hostname}">
+                  <span class="text-red" th:if="${#fields.hasErrors('hostname')}" th:errors="*{hostname}"><i class="fa fa-times-circle-o"></i>Error</span>
+                </div>
+                <div class="form-group">
                   <label for="environment">Environment</label>
                   <select id="environment" class="form-control" th:field="*{environment}">
-                  	<option th:each="environment : ${T(br.com.rlabs.commons.Environment).values()}" th:value="${environment}" th:text="${environment}">
+                  	<option th:each="environment : ${T(com.rlabs.vulcano.monitor.commons.Environment).values()}" th:value="${environment}" th:text="${environment}">
                   	</option>
                   </select>
                   <span class="text-red" th:if="${#fields.hasErrors('environment')}" th:errors="*{environment}"><i class="fa fa-times-circle-o"></i>Error</span>
                 </div>
                 <div class="form-group">
-                  <label for="version">Version</label>
-                  <input type="text" class="form-control" id="version" required="required" th:field="*{version}">
-                  <span class="text-red" th:if="${#fields.hasErrors('version')}" th:errors="*{version}"><i class="fa fa-times-circle-o"></i>Error</span>
-                </div>
-                <div class="form-group">
-                  <label for="hostname">Hostname</label>
-                  <input type="text" class="form-control" id="hostname" required="required" th:field="*{hostname}">
-                  <span class="text-red" th:if="${#fields.hasErrors('hostname')}" th:errors="*{hostname}"><i class="fa fa-times-circle-o"></i>Error</span>
-                </div>
-                <div class="form-group">
-                  <label for="projectRepository">Project Repository</label>
+                  <label for="projectRepository">Project Repository *</label>
                   <input type="text" class="form-control" id="projectRepository" required="required" th:field="*{projectRepository}">
                   <span class="text-red" th:if="${#fields.hasErrors('projectRepository')}" th:errors="*{projectRepository}"><i class="fa fa-times-circle-o"></i>Error</span>
                 </div>

@@ -63,6 +63,11 @@ public class Product implements Serializable {
 	@Column(name = "description")
 	private String description;
 
+	@NotBlank(message = "{product.artifactid.blank}")
+	@Size(min = 5, max = 100)
+	@Column(name = "artifact_id")
+	private String artifactId;
+
 	@Enumerated(EnumType.STRING)
 	@Column(name = "environment")
 	private Environment environment;
@@ -135,6 +140,14 @@ public class Product implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getArtifactId() {
+		return artifactId;
+	}
+
+	public void setArtifactId(String artifactId) {
+		this.artifactId = artifactId;
 	}
 
 	public Environment getEnvironment() {

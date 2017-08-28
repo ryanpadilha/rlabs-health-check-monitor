@@ -78,6 +78,7 @@ public class ProductServiceImpl implements ProductService {
 
 		persisted.setName(product.getName());
 		persisted.setDescription(product.getDescription());
+		persisted.setArtifactId(product.getArtifactId());
 		persisted.setEnvironment(product.getEnvironment());
 		persisted.setVersion(product.getVersion());
 		persisted.setHostname(product.getHostname());

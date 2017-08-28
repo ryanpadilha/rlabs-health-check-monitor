@@ -108,7 +108,7 @@
                 <div class="form-group">
                   <label for="type">Type</label>
                   <select id="type" class="form-control" th:field="*{type}">
-                  	<option th:each="type : ${T(br.com.rlabs.commons.DependencyType).values()}" th:value="${type}" th:text="${type}">
+                  	<option th:each="type : ${T(com.rlabs.vulcano.monitor.commons.DependencyType).values()}" th:value="${type}" th:text="${type}">
                   	</option>
                   </select>
                   <span class="text-red" th:if="${#fields.hasErrors('type')}" th:errors="*{type}"><i class="fa fa-times-circle-o"></i>Error</span>

@@ -35,6 +35,7 @@ create table vl_product (
 	active boolean not null default true,
 	name text not null,
 	description text not null,
+	artifact_id text not null unique,
 	environment text not null,
 	version text not null,
 	hostname text not null,
