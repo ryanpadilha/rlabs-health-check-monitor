@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>br.com.rlabs</groupId>
+	<groupId>com.rlabs.oss.health</groupId>
 	<artifactId>vulcano-health-check-monitor</artifactId>
 	<version>0.0.1</version>
 	<packaging>jar</packaging>
@@ -29,7 +29,7 @@
 			<url>http://www.apache.org/licenses/LICENSE-2.0</url>
 		</license>
 	</licenses>
-	
+
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
@@ -82,7 +82,7 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<!-- exclude tomcat-jdbc, spring-boot will use HikariCP automatically -->
 		<dependency>
 			<groupId>com.zaxxer</groupId>
@@ -108,7 +108,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
-		
+
 		<finalName>${project.artifactId}</finalName>
 	</build>
 
