@@ -6,6 +6,7 @@ import java.util.UUID;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.rlabs.vulcano.monitor.entity.model.ProductStatus;
@@ -44,6 +45,11 @@ public class ProductStatusServiceImpl implements ProductStatusService {
 	@Override
 	public ProductStatus persist(ProductStatus productStatus) {
 		return repository.save(productStatus);
+	}
+
+	@Override
+	public Collection<ProductStatus> findWithPageable(Long productId, Pageable pageable) {
+		return repository.findWithPageable(productId, pageable);
 	}
 
 }

@@ -31,4 +31,6 @@ public interface ProductService {
 	Product delete(UUID internal);
 
 	Product findByArtifactId(String value);
+
+	Collection<Product> processBaseHealthStatus();
 }

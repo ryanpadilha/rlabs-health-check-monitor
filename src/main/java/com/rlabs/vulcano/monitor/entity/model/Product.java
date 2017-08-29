@@ -16,11 +16,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Type;
@@ -95,8 +95,11 @@ public class Product implements Serializable {
 	@ManyToMany(mappedBy = "products", fetch = FetchType.LAZY)
 	private List<Dependency> dependencies;
 
-	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
-	private List<ProductStatus> productStatus;
+	@Transient
+	private Date lastStatusTimestamp;
+
+	@Transient
+	private String statusColor = "bg-green";
 
 	public Long getId() {
 		return id;
@@ -208,6 +211,22 @@ public class Product implements Serializable {
 
 	public void setDependencies(List<Dependency> dependencies) {
 		this.dependencies = dependencies;
+	}
+
+	public Date getLastStatusTimestamp() {
+		return lastStatusTimestamp;
+	}
+
+	public void setLastStatusTimestamp(Date lastStatusTimestamp) {
+		this.lastStatusTimestamp = lastStatusTimestamp;
+	}
+
+	public String getStatusColor() {
+		return statusColor;
+	}
+
+	public void setStatusColor(String statusColor) {
+		this.statusColor = statusColor;
 	}
 
 	@PrePersist

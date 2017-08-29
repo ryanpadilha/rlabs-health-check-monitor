@@ -1,16 +1,24 @@
 package com.rlabs.vulcano.monitor.service.impl;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.UUID;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
+import com.rlabs.vulcano.monitor.commons.Constants;
+import com.rlabs.vulcano.monitor.commons.Status;
 import com.rlabs.vulcano.monitor.entity.model.Product;
+import com.rlabs.vulcano.monitor.entity.model.ProductStatus;
 import com.rlabs.vulcano.monitor.repository.ProductRepository;
 import com.rlabs.vulcano.monitor.service.ProductService;
+import com.rlabs.vulcano.monitor.service.ProductStatusService;
 
 /**
  * Product Service Implementation.
@@ -24,6 +32,9 @@ public class ProductServiceImpl implements ProductService {
 
 	@Autowired
 	private ProductRepository repository;
+
+	@Autowired
+	private ProductStatusService statusService;
 
 	@Override
 	public Collection<Product> list() {
@@ -112,6 +123,47 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public Product findByArtifactId(String value) {
 		return repository.findByArtifactId(value);
+	}
+
+	@Override
+	public Collection<Product> processBaseHealthStatus() {
+		final Collection<Product> collection = new ArrayList<>();
+
+		int cOUT = 0;
+		int cDOWN = 0;
+		Date lastTimestamp = new Date();
+
+		for (Product product : repository.findAll()) {
+			Collection<ProductStatus> status = statusService.findWithPageable(product.getId(),
+					PageRequest.of(0, 10, Direction.ASC, "id"));
+			if (!status.isEmpty()) {
+				for (ProductStatus ps : status) {
+					if (ps.getStatus().equals(Status.DOWN)) {
+						cDOWN++;
+					} else if (ps.getStatus().equals(Status.OUT_OF_SERVICE)) {
+						cOUT++;
+					}
+
+					lastTimestamp = ps.getCreated();
+				}
+
+				if (cDOWN > Constants.STATUS_ALERT_DOWN) {
+					product.setStatusColor("bg-yellow");
+				}
+
+				if (cOUT > Constants.STATUS_ALERT_OUT) {
+					product.setStatusColor("bg-red");
+				}
+
+				cOUT = 0;
+				cDOWN = 0;
+
+				product.setLastStatusTimestamp(lastTimestamp);
+				collection.add(product);
+			}
+		}
+
+		return collection;
 	}
 
 }

@@ -18,4 +18,11 @@ public class Constants {
 	public static final int JOB_FREQUENCY_SECS = 60;
 	public static final String TRIGGER_NAME = "trigger.health.check";
 	public static final int REQUEST_TIMEOUT = 6000;
+
+	/**
+	 * Status health
+	 */
+	public static final int STATUS_ALERT_DOWN = 4;
+	public static final int STATUS_ALERT_OUT = 2;
+
 }

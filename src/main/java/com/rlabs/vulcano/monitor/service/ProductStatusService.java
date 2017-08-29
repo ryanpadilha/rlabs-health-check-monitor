@@ -3,6 +3,8 @@ package com.rlabs.vulcano.monitor.service;
 import java.util.Collection;
 import java.util.UUID;
 
+import org.springframework.data.domain.Pageable;
+
 import com.rlabs.vulcano.monitor.entity.model.ProductStatus;
 
 /**
@@ -21,5 +23,7 @@ public interface ProductStatusService {
 	ProductStatus getByInternal(UUID internal);
 
 	ProductStatus persist(ProductStatus productStatus);
+
+	Collection<ProductStatus> findWithPageable(Long productId, Pageable pageable);
 
 }
