@@ -16,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -93,6 +94,9 @@ public class Product implements Serializable {
 
 	@ManyToMany(mappedBy = "products", fetch = FetchType.LAZY)
 	private List<Dependency> dependencies;
+
+	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+	private List<ProductStatus> productStatus;
 
 	public Long getId() {
 		return id;

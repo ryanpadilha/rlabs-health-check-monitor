@@ -30,6 +30,8 @@ public class DashboardControllerImpl implements DashboardController {
 		final ModelAndView modelAndView = new ModelAndView(FORM_INDEX);
 		modelAndView.addObject("products", productService.list());
 
+		// last-status of product
+
 		return modelAndView;
 	}
 }

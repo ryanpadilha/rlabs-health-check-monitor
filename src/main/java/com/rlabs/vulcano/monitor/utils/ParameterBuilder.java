@@ -4,8 +4,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
-
 /**
  * Parameter String Builder Util.
  *
@@ -15,17 +13,16 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class ParameterBuilder {
 
-	public static String getParamsString(Map<String, String> params) throws UnsupportedEncodingException {
-		if (null == params)
-			return StringUtils.EMPTY;
-
+	public static String getParamsString(final Map<String, String> params) throws UnsupportedEncodingException {
 		final StringBuilder queryString = new StringBuilder();
 
-		for (Map.Entry<String, String> entry : params.entrySet()) {
-			queryString.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
-			queryString.append("=");
-			queryString.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
-			queryString.append("&");
+		if (null != params) {
+			for (Map.Entry<String, String> entry : params.entrySet()) {
+				queryString.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
+				queryString.append("=");
+				queryString.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
+				queryString.append("&");
+			}
 		}
 
 		final String result = queryString.toString();

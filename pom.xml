@@ -91,6 +91,15 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.rlabs.oss.health</groupId>
+			<artifactId>vulcano-health-core</artifactId>
+			<version>0.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+		</dependency>
 
 		<!-- exclude tomcat-jdbc, spring-boot will use HikariCP automatically -->
 		<dependency>

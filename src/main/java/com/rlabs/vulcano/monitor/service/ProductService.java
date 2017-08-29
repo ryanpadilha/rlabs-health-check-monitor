@@ -7,7 +7,7 @@ import com.rlabs.vulcano.monitor.entity.model.Product;
 
 /**
  * The Product Service Interface.
- * 
+ *
  * @author Ryan Padilha <ryan.padilha@gmail.com>
  * @since 0.0.1
  *
@@ -29,4 +29,6 @@ public interface ProductService {
 	Product delete(Long id);
 
 	Product delete(UUID internal);
+
+	Product findByArtifactId(String value);
 }

@@ -109,4 +109,9 @@ public class ProductServiceImpl implements ProductService {
 		return entity;
 	}
 
+	@Override
+	public Product findByArtifactId(String value) {
+		return repository.findByArtifactId(value);
+	}
+
 }

@@ -31,7 +31,7 @@ import com.rlabs.vulcano.monitor.commons.Status;
  */
 @Entity
 @Table(name = "vl_status_details")
-public class StatusDetails implements Serializable {
+public class ProductStatusDetails implements Serializable {
 
 	private static final long serialVersionUID = 7674660259785293340L;
 
