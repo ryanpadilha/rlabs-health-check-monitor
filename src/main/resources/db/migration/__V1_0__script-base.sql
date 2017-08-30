@@ -36,6 +36,7 @@ create table vl_product (
 	name text not null,
 	description text not null,
 	artifact_id text not null unique,
+	last_status_timestamp timestamp,
 	environment text not null,
 	version text not null,
 	hostname text not null,

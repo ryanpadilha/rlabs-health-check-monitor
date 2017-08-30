@@ -27,11 +27,14 @@
         <div class="col-md-6 col-sm-12 col-xs-24" th:each="product : ${products}">
           <div class="info-box">
            	<!-- box-colors: bg-aqua, bg-red, bg-green, bg-yellow -->
-            <span class="info-box-icon bg-green">
-              <a th:href="@{'/platform/product/' + ${product.internal} + '/details'}"><i class="ion ion-ios-gear-outline" style="color: #fff;"></i></a>
-            </span>
-            <div class="info-box-content">
+            <a th:href="@{'/platform/product/' + ${product.internal} + '/details'}">
+              <span th:class="'info-box-icon ' + ${product.statusColor}" style="height: 110px; line-height: 110px;">
+                <i class="ion ion-ios-gear-outline" style="color: #fff;"></i>
+              </span>
+            </a>
+            <div class="info-box-content" style="height: 110px;">
               <span class="info-box-text" style="text-transform: none; font-weight: bold;" th:text="${product.name} +' - '+ ${product.version}"></span>
+              <span class="info-box-text" style="text-transform: none;" th:text="${product.lastStatusTimestamp}"></span>
               <span class="info-box-text" style="text-transform: none;" th:text="${product.environment}"></span>
               <span class="info-box-text" style="text-transform: none;" th:text="${product.hostname}"></span>
               <span class="info-box-text" style="text-transform: none; font-weight: bold; color: #db8b0b;" th:text="${product.organization.name}"></span>

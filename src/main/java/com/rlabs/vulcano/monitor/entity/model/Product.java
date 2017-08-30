@@ -95,7 +95,8 @@ public class Product implements Serializable {
 	@ManyToMany(mappedBy = "products", fetch = FetchType.LAZY)
 	private List<Dependency> dependencies;
 
-	@Transient
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "last_status_timestamp")
 	private Date lastStatusTimestamp;
 
 	@Transient

@@ -64,11 +64,15 @@ public class ApplicationHealthServiceImpl implements ApplicationHealthService {
 			productStatus.setStatus(Status.DOWN);
 		}
 
-		productStatus.setProduct(productService.findByArtifactId(artifactId));
+		final Product product = productService.findByArtifactId(artifactId);
+		product.setLastStatusTimestamp(productStatus.getResponseTimestamp());
+
+		productStatus.setProduct(product);
 		productStatus.setRequestTimestamp(response.getRequestTimestamp());
 		productStatus.setResponseCode(response.getCode());
 
 		statusService.persist(productStatus);
+		productService.persist(product);
 	}
 
 	private ApplicationHealthServiceImpl.ResponseStatus executeGet(String targetURL,

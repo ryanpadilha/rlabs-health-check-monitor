@@ -103,6 +103,8 @@
 	          <dl class="dl-horizontal">
                 <dt>Organization</dt>
                 <dd th:text="${product.organization.name}"></dd>
+                <dt>Last Health Check</dt>
+                <dd th:text="${product.lastStatusTimestamp}"></dd>
                 <dt>Environment</dt>
                 <dd th:text="${product.environment}"></dd>
                 <dt>Hostname</dt>
