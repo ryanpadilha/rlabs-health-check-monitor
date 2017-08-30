@@ -2,6 +2,7 @@ package com.rlabs.vulcano.monitor.service.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 import javax.transaction.Transactional;
@@ -11,12 +12,15 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
+import com.rlabs.vulcano.core.commons.Status;
 import com.rlabs.vulcano.monitor.commons.Constants;
-import com.rlabs.vulcano.monitor.commons.Status;
+import com.rlabs.vulcano.monitor.entity.model.Dependency;
 import com.rlabs.vulcano.monitor.entity.model.Product;
 import com.rlabs.vulcano.monitor.entity.model.ProductStatus;
+import com.rlabs.vulcano.monitor.entity.model.ProductStatusDetails;
 import com.rlabs.vulcano.monitor.repository.ProductRepository;
 import com.rlabs.vulcano.monitor.service.ProductService;
+import com.rlabs.vulcano.monitor.service.ProductStatusDetailsService;
 import com.rlabs.vulcano.monitor.service.ProductStatusService;
 
 /**
@@ -34,6 +38,12 @@ public class ProductServiceImpl implements ProductService {
 
 	@Autowired
 	private ProductStatusService statusService;
+
+	@Autowired
+	private ProductStatusDetailsService detailsService;
+
+	private static final String COLOR_RED = "bg-red";
+	private static final String COLOR_YELLOW = "bg-yellow";
 
 	@Override
 	public Collection<Product> list() {
@@ -130,10 +140,10 @@ public class ProductServiceImpl implements ProductService {
 		final Collection<Product> collection = new ArrayList<>();
 
 		int cOUT = 0, cDOWN = 0;
+		Collection<ProductStatus> status = null;
 
 		for (Product product : repository.findAll()) {
-			Collection<ProductStatus> status = statusService.findWithPageable(product.getId(),
-					PageRequest.of(0, 10, Direction.DESC, "id"));
+			status = statusService.findWithPageable(product.getId(), PageRequest.of(0, 10, Direction.DESC, "id"));
 			if (!status.isEmpty()) {
 				for (ProductStatus ps : status) {
 					if (ps.getStatus().equals(Status.DOWN)) {
@@ -144,11 +154,11 @@ public class ProductServiceImpl implements ProductService {
 				}
 
 				if (cDOWN > Constants.STATUS_ALERT_DOWN) {
-					product.setStatusColor("bg-yellow");
+					product.setStatusColor(COLOR_YELLOW);
 				}
 
 				if (cOUT > Constants.STATUS_ALERT_OUT) {
-					product.setStatusColor("bg-red");
+					product.setStatusColor(COLOR_RED);
 				}
 
 				cOUT = 0;
@@ -158,6 +168,38 @@ public class ProductServiceImpl implements ProductService {
 		}
 
 		return collection;
+	}
+
+	@Override
+	public void processDependenciesHealthStatus(Product product) {
+		final List<Dependency> collection = new ArrayList<>();
+
+		if (null != product && null != product.getDependencies()) {
+			Collection<ProductStatusDetails> status = null;
+
+			for (Dependency dependency : product.getDependencies()) {
+				status = detailsService.findWithPageable(dependency.getId(),
+						PageRequest.of(0, 1, Direction.DESC, "id"));
+				if (!status.isEmpty()) {
+					for (ProductStatusDetails ps : status) {
+						if (ps.getStatus().equals(Status.DOWN)) {
+							dependency.setStatusColor(COLOR_RED);
+						}
+
+						// TODO define other color here!
+						if (ps.getStatus().equals(Status.OUT_OF_SERVICE)) {
+							dependency.setStatusColor(COLOR_RED);
+						}
+
+						collection.add(dependency);
+					}
+				}
+			}
+		}
+
+		if (!collection.isEmpty()) {
+			product.setDependencies(collection);
+		}
 	}
 
 }

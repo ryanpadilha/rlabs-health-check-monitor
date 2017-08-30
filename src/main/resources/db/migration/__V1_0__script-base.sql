@@ -53,6 +53,7 @@ create table vl_dependency (
 	internal uuid not null unique default uuid_generate_v4(),
 	created timestamp not null default now(),
 	name text not null,
+	artifact_id text not null unique,
 	type text not null,
 	version text not null,
 	hostname text not null,
@@ -88,13 +89,14 @@ create table vl_status_details (
 	id bigserial not null primary key,
 	internal uuid not null unique default uuid_generate_v4(),
 	created timestamp not null default now(),
-	description text not null,
-	result text not null,
+	resource text not null,
+	status text not null,
+	dependency_type text not null,
 	details text,
+	status_id bigint not null,
 	dependency_id bigint not null
 );
 
-alter table vl_status_details add constraint fk_dependency_status foreign key (dependency_id) references vl_dependency(id);
-
-
+alter table vl_status_details add constraint fk_status_details foreign key (status_id) references vl_status(id);
+alter table vl_status_details add constraint fk_dependency_details foreign key (dependency_id) references vl_dependency(id);
 

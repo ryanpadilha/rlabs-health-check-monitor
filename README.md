@@ -1,5 +1,7 @@
 # vulcano-health-check-monitor
 
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+
 ##### Version 0.0.1
 
 Vulcano Health Check API Monitor for Microservices.<br>

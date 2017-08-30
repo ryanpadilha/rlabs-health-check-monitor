@@ -107,6 +107,7 @@
                 <thead>
                 <tr>
                   <th>Name</th>
+                  <th>ArtifactID</th>
                   <th>Version</th>
                   <th>Hostname</th>
                   <th>Type</th>
@@ -117,6 +118,7 @@
                 <tbody>
                 <tr th:each="dependency : ${dependencies}">
                 	<td th:text="${dependency.name}"></td>
+                	<td th:text="${dependency.artifactId}"></td>
                 	<td th:text="${dependency.version}"></td>
                 	<td th:text="${dependency.hostname}"></td>
                 	<td th:text="${dependency.type}"></td>

@@ -33,4 +33,6 @@ public interface ProductService {
 	Product findByArtifactId(String value);
 
 	Collection<Product> processBaseHealthStatus();
+
+	void processDependenciesHealthStatus(Product product);
 }

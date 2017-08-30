@@ -78,6 +78,7 @@ public class DependencyServiceImpl implements DependencyService {
 			return null;
 
 		persisted.setName(dependency.getName());
+		persisted.setArtifactId(dependency.getArtifactId());
 		persisted.setType(dependency.getType());
 		persisted.setVersion(dependency.getVersion());
 		persisted.setHostname(dependency.getHostname());

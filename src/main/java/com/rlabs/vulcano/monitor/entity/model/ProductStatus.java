@@ -20,7 +20,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Type;
 
-import com.rlabs.vulcano.monitor.commons.Status;
+import com.rlabs.vulcano.core.commons.Status;
 
 /**
  * Product Status.

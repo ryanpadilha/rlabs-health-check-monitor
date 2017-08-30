@@ -92,7 +92,7 @@ public class Product implements Serializable {
 	@JoinColumn(name = "organization_id")
 	private Organization organization;
 
-	@ManyToMany(mappedBy = "products", fetch = FetchType.LAZY)
+	@ManyToMany(mappedBy = "products", fetch = FetchType.EAGER)
 	private List<Dependency> dependencies;
 
 	@Temporal(TemporalType.TIMESTAMP)

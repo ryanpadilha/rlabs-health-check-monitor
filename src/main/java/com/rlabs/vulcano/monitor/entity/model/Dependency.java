@@ -19,12 +19,13 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotBlank;
 
-import com.rlabs.vulcano.monitor.commons.DependencyType;
+import com.rlabs.vulcano.core.commons.DependencyType;
 
 /**
  * Dependency class.
@@ -54,6 +55,11 @@ public class Dependency implements Serializable {
 	@Column(name = "name")
 	private String name;
 
+	@NotBlank(message = "{dependency.artifactid.blank}")
+	@Size(min = 5, max = 100)
+	@Column(name = "artifact_id")
+	private String artifactId;
+
 	@Enumerated(EnumType.STRING)
 	@Column(name = "type")
 	private DependencyType type;
@@ -73,6 +79,17 @@ public class Dependency implements Serializable {
 	@JoinTable(name = "vl_product_dependency", joinColumns = {
 			@JoinColumn(name = "dependency_id") }, inverseJoinColumns = { @JoinColumn(name = "product_id") })
 	private List<Product> products;
+
+	@Transient
+	private String statusColor = "bg-green";
+
+	public Dependency() {
+
+	}
+
+	public Dependency(String artifactId) {
+		this.artifactId = artifactId;
+	}
 
 	public Long getId() {
 		return id;
@@ -104,6 +121,14 @@ public class Dependency implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getArtifactId() {
+		return artifactId;
+	}
+
+	public void setArtifactId(String artifactId) {
+		this.artifactId = artifactId;
 	}
 
 	public DependencyType getType() {
@@ -144,6 +169,39 @@ public class Dependency implements Serializable {
 
 	public void setProducts(List<Product> products) {
 		this.products = products;
+	}
+
+	public String getStatusColor() {
+		return statusColor;
+	}
+
+	public void setStatusColor(String statusColor) {
+		this.statusColor = statusColor;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((artifactId == null) ? 0 : artifactId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Dependency other = (Dependency) obj;
+		if (artifactId == null) {
+			if (other.artifactId != null)
+				return false;
+		} else if (!artifactId.equals(other.artifactId))
+			return false;
+		return true;
 	}
 
 	@PrePersist

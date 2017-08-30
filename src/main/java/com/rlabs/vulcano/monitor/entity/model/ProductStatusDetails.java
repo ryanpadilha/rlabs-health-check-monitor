@@ -13,14 +13,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Type;
+import org.hibernate.validator.constraints.NotEmpty;
 
-import com.rlabs.vulcano.monitor.commons.Status;
+import com.rlabs.vulcano.core.commons.DependencyType;
+import com.rlabs.vulcano.core.commons.Status;
 
 /**
  * Status Details class.
@@ -45,15 +49,25 @@ public class ProductStatusDetails implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date created;
 
-	@Column(name = "description")
-	private String description;
+	@NotEmpty
+	@Column(name = "resource")
+	private String resource;
+
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	@Column(name = "status")
+	private Status status;
 
 	@Enumerated(EnumType.STRING)
-	@Column(name = "result")
-	private Status result;
+	@Column(name = "dependency_type")
+	private DependencyType dependencyType;
 
 	@Column(name = "details")
 	private String details;
+
+	@OneToOne
+	@JoinColumn(name = "status_id")
+	private ProductStatus productStatus;
 
 	@ManyToOne
 	@JoinColumn(name = "dependency_id")
@@ -83,20 +97,28 @@ public class ProductStatusDetails implements Serializable {
 		this.created = created;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getResource() {
+		return resource;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setResource(String resource) {
+		this.resource = resource;
 	}
 
-	public Status getResult() {
-		return result;
+	public Status getStatus() {
+		return status;
 	}
 
-	public void setResult(Status result) {
-		this.result = result;
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
+	public DependencyType getDependencyType() {
+		return dependencyType;
+	}
+
+	public void setDependencyType(DependencyType dependencyType) {
+		this.dependencyType = dependencyType;
 	}
 
 	public String getDetails() {
@@ -105,6 +127,14 @@ public class ProductStatusDetails implements Serializable {
 
 	public void setDetails(String details) {
 		this.details = details;
+	}
+
+	public ProductStatus getProductStatus() {
+		return productStatus;
+	}
+
+	public void setProductStatus(ProductStatus productStatus) {
+		this.productStatus = productStatus;
 	}
 
 	public Dependency getDependency() {

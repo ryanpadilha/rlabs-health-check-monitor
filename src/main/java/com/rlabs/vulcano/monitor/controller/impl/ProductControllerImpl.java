@@ -104,7 +104,10 @@ public class ProductControllerImpl implements ProductController {
 	@RequestMapping(value = "/{internal}/details", method = RequestMethod.GET)
 	public ModelAndView details(@PathVariable("internal") UUID internal) {
 		final ModelAndView modelAndView = new ModelAndView(PRODUCT_DETAILS);
-		modelAndView.addObject("product", service.getByInternal(internal));
+		final Product product = service.getByInternal(internal);
+		service.processDependenciesHealthStatus(product);
+
+		modelAndView.addObject("product", product);
 		return modelAndView;
 	}
 
