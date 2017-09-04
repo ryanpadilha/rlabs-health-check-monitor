@@ -40,6 +40,9 @@ create table vl_product (
 	environment text not null,
 	version text not null,
 	hostname text not null,
+	endpoint_health text,
+	endpoint_property text,
+	endpoint_environment text,
 	project_repository text not null,
 	project_page text,
 	organization_id bigint not null
@@ -53,7 +56,7 @@ create table vl_dependency (
 	internal uuid not null unique default uuid_generate_v4(),
 	created timestamp not null default now(),
 	name text not null,
-	artifact_id text not null unique,
+	artifact_id text not null,
 	type text not null,
 	version text not null,
 	hostname text not null,

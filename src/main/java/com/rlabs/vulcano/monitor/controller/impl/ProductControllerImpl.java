@@ -19,6 +19,7 @@ import com.rlabs.vulcano.monitor.controller.ProductController;
 import com.rlabs.vulcano.monitor.entity.model.Product;
 import com.rlabs.vulcano.monitor.service.OrganizationService;
 import com.rlabs.vulcano.monitor.service.ProductService;
+import com.rlabs.vulcano.monitor.service.ServiceIntegration;
 
 /**
  * The Product WEB-MVC Controller.
@@ -36,6 +37,9 @@ public class ProductControllerImpl implements ProductController {
 
 	@Autowired
 	private OrganizationService organizationService;
+
+	@Autowired
+	private ServiceIntegration serviceIntegration;
 
 	@Autowired
 	private ResourceMessage message;
@@ -108,6 +112,9 @@ public class ProductControllerImpl implements ProductController {
 		service.processDependenciesHealthStatus(product);
 
 		modelAndView.addObject("product", product);
+		modelAndView.addObject("propsEnvironment", serviceIntegration.requestEnvironment(product));
+		modelAndView.addObject("propsProperty", serviceIntegration.requestProperty(product));
+
 		return modelAndView;
 	}
 

@@ -96,24 +96,56 @@
 	      <!-- info row -->
 	      <div class="row invoice-info">
 	        <div class="col-sm-12">
-	          <dl style="margin-left: 5px;">
-                <dt>Description</dt>
-                <dd th:text="${product.description}"></dd>
-              </dl>
-	          <dl class="dl-horizontal">
-                <dt>Organization</dt>
-                <dd th:text="${product.organization.name}"></dd>
-                <dt>Last Health Check</dt>
-                <dd th:text="${product.lastStatusTimestamp}"></dd>
-                <dt>Environment</dt>
-                <dd th:text="${product.environment}"></dd>
-                <dt>Hostname</dt>
-                <dd th:text="${product.hostname}"></dd>
-                <dt>Project Repository</dt>
-                <dd th:text="${product.projectRepository}"></dd>
-                <dt>Project Page</dt>
-                <dd th:text="${product.projectPage}"></dd>
-              </dl>
+
+			  <dl style="margin-left: 5px;">
+		        <dt>Description</dt>
+		      	<dd th:text="${product.description}"></dd>
+		      </dl>
+
+	          <!-- Custom Tabs -->
+	          <div class="nav-tabs-custom">
+	            <ul class="nav nav-tabs">
+	              <li class="active"><a href="#tab_1" data-toggle="tab">Service</a></li>
+	              <li><a href="#tab_2" data-toggle="tab">Properties</a></li>
+	              <li><a href="#tab_3" data-toggle="tab">Environment</a></li>
+	              <!-- <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li> -->
+	            </ul>
+	            <div class="tab-content">
+	              <div class="tab-pane active" id="tab_1">
+					  <dl class="dl-horizontal">
+		                <dt>Organization</dt>
+		                <dd th:text="${product.organization.name}"></dd>
+		                <dt>Last Health Check</dt>
+		                <dd th:text="${product.lastStatusTimestamp}"></dd>
+		                <dt>Environment</dt>
+		                <dd th:text="${product.environment}"></dd>
+		                <dt>Hostname</dt>
+		                <dd th:text="${product.hostname}"></dd>
+		                <dt>Project Repository</dt>
+		                <dd th:text="${product.projectRepository}"></dd>
+		                <dt>Project Page</dt>
+		                <dd th:text="${product.projectPage}"></dd>
+		              </dl>
+	              </div>
+	              <div class="tab-pane" id="tab_2">
+	                <table class="table table-striped">
+	                  <tr th:each="instance : ${propsProperty}">
+	                    <td style="font-weight: 700;" th:text="${instance.key}"></td>
+	                    <td th:text="${instance.value}"></td>
+	                  </tr>
+	                </table>
+	              </div>
+	              <div class="tab-pane" id="tab_3">
+	                <table class="table table-striped" style="table-layout: auto;">
+	                  <tr th:each="instance : ${propsEnvironment}">
+	                    <td style="font-weight: 700;" th:text="${instance.key}"></td>
+	                    <td><textarea class="form-control" rows="2" th:text="${instance.value}" disabled="disabled"></textarea></td>
+	                  </tr>
+	                </table>
+	              </div>
+	            </div>
+	          </div>
+
 	        </div>
 	      </div>
 	      <!-- /.row -->

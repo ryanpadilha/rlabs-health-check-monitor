@@ -81,6 +81,15 @@ public class Product implements Serializable {
 	@Column(name = "hostname")
 	private String hostname;
 
+	@Column(name = "endpoint_health")
+	private String endpointHealth;
+
+	@Column(name = "endpoint_property")
+	private String endpointProperty;
+
+	@Column(name = "endpoint_environment")
+	private String endpointEnvironment;
+
 	@NotBlank(message = "{product.project.repository.blank}")
 	@Column(name = "project_repository")
 	private String projectRepository;
@@ -180,6 +189,30 @@ public class Product implements Serializable {
 
 	public void setHostname(String hostname) {
 		this.hostname = hostname;
+	}
+
+	public String getEndpointHealth() {
+		return endpointHealth;
+	}
+
+	public void setEndpointHealth(String endpointHealth) {
+		this.endpointHealth = endpointHealth;
+	}
+
+	public String getEndpointProperty() {
+		return endpointProperty;
+	}
+
+	public void setEndpointProperty(String endpointProperty) {
+		this.endpointProperty = endpointProperty;
+	}
+
+	public String getEndpointEnvironment() {
+		return endpointEnvironment;
+	}
+
+	public void setEndpointEnvironment(String endpointEnvironment) {
+		this.endpointEnvironment = endpointEnvironment;
 	}
 
 	public String getProjectRepository() {

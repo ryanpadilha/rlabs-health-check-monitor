@@ -116,9 +116,25 @@
                   <span class="text-red" th:if="${#fields.hasErrors('version')}" th:errors="*{version}"><i class="fa fa-times-circle-o"></i>Error</span>
                 </div>
                 <div class="form-group">
-                  <label for="hostname">Hostname (health endpoint) *</label>
+                  <label for="hostname">Hostname *</label>
                   <input type="text" class="form-control" id="hostname" required="required" th:field="*{hostname}">
                   <span class="text-red" th:if="${#fields.hasErrors('hostname')}" th:errors="*{hostname}"><i class="fa fa-times-circle-o"></i>Error</span>
+                </div>
+
+                <div class="form-group">
+                  <label for="hostname">Health Endpoint</label>
+                  <input type="text" class="form-control" id="endpointHealth" th:field="*{endpointHealth}">
+                  <span class="text-red" th:if="${#fields.hasErrors('endpointHealth')}" th:errors="*{endpointHealth}"><i class="fa fa-times-circle-o"></i>Error</span>
+                </div>
+                <div class="form-group">
+                  <label for="hostname">Property Endpoint</label>
+                  <input type="text" class="form-control" id="endpointProperty" th:field="*{endpointProperty}">
+                  <span class="text-red" th:if="${#fields.hasErrors('endpointProperty')}" th:errors="*{endpointProperty}"><i class="fa fa-times-circle-o"></i>Error</span>
+                </div>
+                <div class="form-group">
+                  <label for="hostname">Environment Endpoint</label>
+                  <input type="text" class="form-control" id="endpointEnvironment" th:field="*{endpointEnvironment}">
+                  <span class="text-red" th:if="${#fields.hasErrors('endpointEnvironment')}" th:errors="*{endpointEnvironment}"><i class="fa fa-times-circle-o"></i>Error</span>
                 </div>
                 <div class="form-group">
                   <label for="environment">Environment</label>

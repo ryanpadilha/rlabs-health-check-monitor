@@ -103,6 +103,9 @@ public class ProductServiceImpl implements ProductService {
 		persisted.setEnvironment(product.getEnvironment());
 		persisted.setVersion(product.getVersion());
 		persisted.setHostname(product.getHostname());
+		persisted.setEndpointHealth(product.getEndpointHealth());
+		persisted.setEndpointProperty(product.getEndpointProperty());
+		persisted.setEndpointEnvironment(product.getEndpointEnvironment());
 		persisted.setProjectRepository(product.getProjectRepository());
 		persisted.setProjectPage(product.getProjectPage());
 		persisted.setActive(product.isActive());
