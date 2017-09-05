@@ -78,18 +78,18 @@
 
   <!-- header -->
   <div th:replace="fragments/header :: header"></div>
-  
+
   <!-- Left side column. contains the logo and sidebar -->
   <div th:replace="fragments/menu :: menu"></div>
 
   <!-- Content Wrapper. Contains page content -->
   <div th:replace="fragments/dashboard-content-main :: dashboard-content-main"></div>
-  
+
   <!-- footer -->
   <div th:replace="fragments/footer :: footer"></div>
 
   <!-- Control Sidebar -->
-  <div th:replace="fragments/control-side :: control-side"></div>  
+  <div th:replace="fragments/control-side :: control-side"></div>
 </div>
 <!-- ./wrapper -->
 
@@ -166,5 +166,12 @@
 <!-- AdminLTE for demo purposes -->
 <script src="../static/dist/js/demo.js"
 	th:src="@{/dist/js/demo.js}"></script>
+
+<script>
+setTimeout(function () {
+    window.location.reload(1);
+}, 60000); // reload every 1 min
+</script>
+
 </body>
 </html>

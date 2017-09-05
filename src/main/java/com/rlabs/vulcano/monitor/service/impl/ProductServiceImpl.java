@@ -146,7 +146,7 @@ public class ProductServiceImpl implements ProductService {
 		int cOUT = 0, cDOWN = 0;
 		Collection<ProductStatus> status = null;
 
-		for (Product product : repository.findAll()) {
+		for (Product product : repository.findAllByActive(true)) {
 			status = statusService.findWithPageable(product.getId(), PageRequest.of(0, 10, Direction.DESC, "id"));
 			if (!status.isEmpty()) {
 				for (ProductStatus ps : status) {

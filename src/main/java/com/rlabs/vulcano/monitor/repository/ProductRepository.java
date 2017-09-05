@@ -1,5 +1,6 @@
 package com.rlabs.vulcano.monitor.repository;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -21,4 +22,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 	Product findByInternal(@Param("internal") UUID internal);
 
 	Product findByArtifactId(String value);
+
+	@Query("SELECT p FROM Product p WHERE p.active = :active")
+	List<Product> findAllByActive(@Param("active") Boolean active);
+
 }
