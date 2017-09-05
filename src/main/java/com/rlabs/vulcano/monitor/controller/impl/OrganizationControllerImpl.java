@@ -7,6 +7,8 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -54,7 +56,7 @@ public class OrganizationControllerImpl implements OrganizationController {
 	@RequestMapping(value = { "", "/" }, method = RequestMethod.GET)
 	public ModelAndView list() {
 		final ModelAndView modelAndView = new ModelAndView(FORM_LIST);
-		Collection<Organization> organizations = service.list();
+		Collection<Organization> organizations = service.list(Sort.by(Direction.ASC, "id"));
 		modelAndView.addObject("organizations", organizations);
 		return modelAndView;
 	}
@@ -95,7 +97,7 @@ public class OrganizationControllerImpl implements OrganizationController {
 			modelAndView.addObject("error", message.getString("message.constraint.delete"));
 		}
 
-		modelAndView.addObject("organizations", service.list());
+		modelAndView.addObject("organizations", service.list(Sort.by(Direction.ASC, "id")));
 		return modelAndView;
 	}
 

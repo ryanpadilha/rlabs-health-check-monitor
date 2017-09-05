@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
@@ -46,8 +47,8 @@ public class ProductServiceImpl implements ProductService {
 	private static final String COLOR_YELLOW = "bg-yellow";
 
 	@Override
-	public Collection<Product> list() {
-		return repository.findAll();
+	public Collection<Product> list(Sort sort) {
+		return repository.findAll(sort);
 	}
 
 	@Override

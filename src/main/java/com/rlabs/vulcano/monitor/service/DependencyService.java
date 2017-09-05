@@ -3,18 +3,20 @@ package com.rlabs.vulcano.monitor.service;
 import java.util.Collection;
 import java.util.UUID;
 
+import org.springframework.data.domain.Sort;
+
 import com.rlabs.vulcano.monitor.entity.model.Dependency;
 
 /**
  * The Dependency Service Interface.
- * 
+ *
  * @author Ryan Padilha <ryan.padilha@gmail.com>
  * @since 0.0.1
  *
  */
 public interface DependencyService {
 
-	Collection<Dependency> list();
+	Collection<Dependency> list(Sort sort);
 
 	Dependency get(Long id);
 

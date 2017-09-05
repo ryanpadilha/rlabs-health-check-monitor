@@ -3,6 +3,8 @@ package com.rlabs.vulcano.monitor.service;
 import java.util.Collection;
 import java.util.UUID;
 
+import org.springframework.data.domain.Sort;
+
 import com.rlabs.vulcano.monitor.entity.model.Organization;
 import com.rlabs.vulcano.monitor.exceptions.UniqueConstraintException;
 
@@ -15,7 +17,7 @@ import com.rlabs.vulcano.monitor.exceptions.UniqueConstraintException;
  */
 public interface OrganizationService {
 
-	Collection<Organization> list();
+	Collection<Organization> list(Sort sort);
 
 	Organization get(Long id);
 

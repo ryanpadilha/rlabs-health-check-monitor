@@ -6,6 +6,8 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -49,7 +51,7 @@ public class DependencyControllerImpl implements DependencyController {
 	public ModelAndView form() {
 		final ModelAndView modelAndView = new ModelAndView(FORM);
 		modelAndView.addObject("dependency", new Dependency());
-		modelAndView.addObject("products", productService.list());
+		modelAndView.addObject("products", productService.list(Sort.by(Direction.ASC, "id")));
 		return modelAndView;
 	}
 
@@ -57,7 +59,7 @@ public class DependencyControllerImpl implements DependencyController {
 	@RequestMapping(value = { "", "/" }, method = RequestMethod.GET)
 	public ModelAndView list() {
 		final ModelAndView modelAndView = new ModelAndView(FORM_LIST);
-		modelAndView.addObject("dependencies", service.list());
+		modelAndView.addObject("dependencies", service.list(Sort.by(Direction.ASC, "id")));
 		return modelAndView;
 	}
 
@@ -66,7 +68,7 @@ public class DependencyControllerImpl implements DependencyController {
 	public ModelAndView getByInternal(@PathVariable("internal") UUID internal) {
 		final ModelAndView modelAndView = new ModelAndView(FORM);
 		modelAndView.addObject("dependency", service.getByInternal(internal));
-		modelAndView.addObject("products", productService.list());
+		modelAndView.addObject("products", productService.list(Sort.by(Direction.ASC, "id")));
 		return modelAndView;
 	}
 
@@ -74,7 +76,7 @@ public class DependencyControllerImpl implements DependencyController {
 	@RequestMapping(value = "/form", method = RequestMethod.POST)
 	public ModelAndView persist(@Valid Dependency dependency, BindingResult result) {
 		final ModelAndView modelAndView = new ModelAndView(FORM);
-		modelAndView.addObject("products", productService.list());
+		modelAndView.addObject("products", productService.list(Sort.by(Direction.ASC, "id")));
 
 		if (!result.hasErrors()) {
 			service.persist(dependency);
@@ -95,7 +97,7 @@ public class DependencyControllerImpl implements DependencyController {
 			modelAndView.addObject("error", message.getString("message.constraint.delete"));
 		}
 
-		modelAndView.addObject("dependencies", service.list());
+		modelAndView.addObject("dependencies", service.list(Sort.by(Direction.ASC, "id")));
 		return modelAndView;
 	}
 

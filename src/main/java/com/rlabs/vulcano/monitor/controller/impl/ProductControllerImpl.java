@@ -6,6 +6,8 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -54,7 +56,7 @@ public class ProductControllerImpl implements ProductController {
 	public ModelAndView form() {
 		final ModelAndView modelAndView = new ModelAndView(FORM);
 		modelAndView.addObject(new Product());
-		modelAndView.addObject("organizations", organizationService.list());
+		modelAndView.addObject("organizations", organizationService.list(Sort.by(Direction.ASC, "id")));
 		return modelAndView;
 	}
 
@@ -62,7 +64,7 @@ public class ProductControllerImpl implements ProductController {
 	@RequestMapping(value = { "", "/" }, method = RequestMethod.GET)
 	public ModelAndView list() {
 		final ModelAndView modelAndView = new ModelAndView(FORM_LIST);
-		modelAndView.addObject("products", service.list());
+		modelAndView.addObject("products", service.list(Sort.by(Direction.ASC, "id")));
 		return modelAndView;
 	}
 
@@ -71,7 +73,7 @@ public class ProductControllerImpl implements ProductController {
 	public ModelAndView getByInternal(@PathVariable("internal") UUID internal) {
 		final ModelAndView modelAndView = new ModelAndView(FORM);
 		modelAndView.addObject("product", service.getByInternal(internal));
-		modelAndView.addObject("organizations", organizationService.list());
+		modelAndView.addObject("organizations", organizationService.list(Sort.by(Direction.ASC, "id")));
 		return modelAndView;
 	}
 
@@ -79,7 +81,7 @@ public class ProductControllerImpl implements ProductController {
 	@RequestMapping(value = "/form", method = RequestMethod.POST)
 	public ModelAndView persist(@Valid Product product, BindingResult result) {
 		final ModelAndView modelAndView = new ModelAndView(FORM);
-		modelAndView.addObject("organizations", organizationService.list());
+		modelAndView.addObject("organizations", organizationService.list(Sort.by(Direction.ASC, "id")));
 
 		if (!result.hasErrors()) {
 			service.persist(product);
@@ -100,7 +102,7 @@ public class ProductControllerImpl implements ProductController {
 			modelAndView.addObject("error", message.getString("message.constraint.delete"));
 		}
 
-		modelAndView.addObject("products", service.list());
+		modelAndView.addObject("products", service.list(Sort.by(Direction.ASC, "id")));
 		return modelAndView;
 	}
 

@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.rlabs.vulcano.monitor.entity.model.ProductStatus;
@@ -27,8 +28,8 @@ public class ProductStatusServiceImpl implements ProductStatusService {
 	private ProductStatusRepository repository;
 
 	@Override
-	public Collection<ProductStatus> list() {
-		return repository.findAll();
+	public Collection<ProductStatus> list(Sort sort) {
+		return repository.findAll(sort);
 	}
 
 	@Override

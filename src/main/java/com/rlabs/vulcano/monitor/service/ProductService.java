@@ -3,6 +3,8 @@ package com.rlabs.vulcano.monitor.service;
 import java.util.Collection;
 import java.util.UUID;
 
+import org.springframework.data.domain.Sort;
+
 import com.rlabs.vulcano.monitor.entity.model.Product;
 
 /**
@@ -14,7 +16,7 @@ import com.rlabs.vulcano.monitor.entity.model.Product;
  */
 public interface ProductService {
 
-	Collection<Product> list();
+	Collection<Product> list(Sort sort);
 
 	Product get(Long id);
 

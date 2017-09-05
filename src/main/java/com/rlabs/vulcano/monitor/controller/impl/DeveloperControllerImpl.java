@@ -6,6 +6,8 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -50,7 +52,7 @@ public class DeveloperControllerImpl implements DeveloperController {
 	public ModelAndView form() {
 		final ModelAndView modelAndView = new ModelAndView(FORM);
 		modelAndView.addObject(new Developer());
-		modelAndView.addObject("organizations", organizationService.list());
+		modelAndView.addObject("organizations", organizationService.list(Sort.by(Direction.ASC, "id")));
 		return modelAndView;
 	}
 
@@ -58,7 +60,7 @@ public class DeveloperControllerImpl implements DeveloperController {
 	@RequestMapping(value = { "", "/" }, method = RequestMethod.GET)
 	public ModelAndView list() {
 		final ModelAndView modelAndView = new ModelAndView(FORM_LIST);
-		modelAndView.addObject("developers", service.list());
+		modelAndView.addObject("developers", service.list(Sort.by(Direction.ASC, "id")));
 		return modelAndView;
 	}
 
@@ -67,7 +69,7 @@ public class DeveloperControllerImpl implements DeveloperController {
 	public ModelAndView getByInternal(@PathVariable("internal") UUID internal) {
 		final ModelAndView modelAndView = new ModelAndView(FORM);
 		modelAndView.addObject("developer", service.getByInternal(internal));
-		modelAndView.addObject("organizations", organizationService.list());
+		modelAndView.addObject("organizations", organizationService.list(Sort.by(Direction.ASC, "id")));
 		return modelAndView;
 	}
 
@@ -75,7 +77,7 @@ public class DeveloperControllerImpl implements DeveloperController {
 	@RequestMapping(value = "/form", method = RequestMethod.POST)
 	public ModelAndView persist(@Valid Developer developer, BindingResult result) {
 		final ModelAndView modelAndView = new ModelAndView(FORM);
-		modelAndView.addObject("organizations", organizationService.list());
+		modelAndView.addObject("organizations", organizationService.list(Sort.by(Direction.ASC, "id")));
 
 		if (!result.hasErrors()) {
 			try {
@@ -100,7 +102,7 @@ public class DeveloperControllerImpl implements DeveloperController {
 			modelAndView.addObject("error", message.getString("message.constraint.delete"));
 		}
 
-		modelAndView.addObject("developers", service.list());
+		modelAndView.addObject("developers", service.list(Sort.by(Direction.ASC, "id")));
 		return modelAndView;
 	}
 

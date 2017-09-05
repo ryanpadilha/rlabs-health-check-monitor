@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.UUID;
 
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import com.rlabs.vulcano.monitor.entity.model.ProductStatus;
 
@@ -16,7 +17,7 @@ import com.rlabs.vulcano.monitor.entity.model.ProductStatus;
  */
 public interface ProductStatusService {
 
-	Collection<ProductStatus> list();
+	Collection<ProductStatus> list(Sort sort);
 
 	ProductStatus get(Long id);
 

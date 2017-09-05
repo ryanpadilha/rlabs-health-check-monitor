@@ -45,7 +45,7 @@ public class ApplicationHealthServiceImpl implements ApplicationHealthService {
 
 	@Override
 	public void executeHealthCheck() {
-		final Collection<Product> products = productService.list();
+		final Collection<Product> products = productService.list(null);
 		for (Product product : products) {
 			persistHealthStatus(product.getArtifactId(), HttpClient.executeGet(product.getEndpointHealth(), null));
 		}

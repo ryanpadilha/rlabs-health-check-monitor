@@ -3,6 +3,8 @@ package com.rlabs.vulcano.monitor.service;
 import java.util.Collection;
 import java.util.UUID;
 
+import org.springframework.data.domain.Sort;
+
 import com.rlabs.vulcano.monitor.entity.model.Developer;
 import com.rlabs.vulcano.monitor.exceptions.UniqueConstraintException;
 
@@ -15,7 +17,7 @@ import com.rlabs.vulcano.monitor.exceptions.UniqueConstraintException;
  */
 public interface DeveloperService {
 
-	Collection<Developer> list();
+	Collection<Developer> list(Sort sort);
 
 	Developer get(Long id);
 

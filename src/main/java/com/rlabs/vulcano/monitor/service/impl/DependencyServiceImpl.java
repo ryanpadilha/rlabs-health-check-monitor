@@ -6,6 +6,7 @@ import java.util.UUID;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.rlabs.vulcano.monitor.entity.model.Dependency;
@@ -26,8 +27,8 @@ public class DependencyServiceImpl implements DependencyService {
 	private DependencyRepository repository;
 
 	@Override
-	public Collection<Dependency> list() {
-		return repository.findAll();
+	public Collection<Dependency> list(Sort sort) {
+		return repository.findAll(sort);
 	}
 
 	@Override

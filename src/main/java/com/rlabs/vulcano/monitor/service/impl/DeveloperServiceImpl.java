@@ -6,6 +6,7 @@ import java.util.UUID;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.rlabs.vulcano.monitor.config.ResourceMessage;
@@ -31,8 +32,8 @@ public class DeveloperServiceImpl implements DeveloperService {
 	private ResourceMessage message;
 
 	@Override
-	public Collection<Developer> list() {
-		return repository.findAll();
+	public Collection<Developer> list(Sort sort) {
+		return repository.findAll(sort);
 	}
 
 	@Override
