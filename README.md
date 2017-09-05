@@ -3,9 +3,16 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 Vulcano Health Check API Monitor for Microservices.<br>
-This application consume expose endpoints for monitoring services on SOA.<br><br>
+This application consume exposed endpoints for monitoring services on SOA.<br><br>
 The goal is include additional features for monitoring and manage applications when it's on production environment.<br>
-Basically we check two endpoints: <i>/health</i> and <i>/info</i> on this version.
+Basically we check, on this version, four endpoints:
+
+- /health
+- /info
+- /properties
+- /environment
+
+See more details on [vulcano-health-core](https://github.com/ryanpadilha/vulcano-health-core).
 
 ## Requirements
 
