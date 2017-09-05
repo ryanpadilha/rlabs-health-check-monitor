@@ -14,11 +14,21 @@ Basically we check, on this version, four endpoints:
 
 See more details on [vulcano-health-core](https://github.com/ryanpadilha/vulcano-health-core).
 
-## Requirements
+### Requirements
 
 - Java 1.8 or later.
 - Maven 3.x or later.
 - PostgreSQL Server 9.x or later.
+
+## Execution
+
+To execute this Spring Boot Application just run the statement as follow:
+
+```
+java -jar vulcano-health-check-monitor.jar
+```
+
+The server is running on [http://localhost:9192/](http://localhost:9192/)
 
 ## License
 
