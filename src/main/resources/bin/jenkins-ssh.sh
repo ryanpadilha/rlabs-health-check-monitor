@@ -4,9 +4,9 @@
 # On SSH Publishers > Tranfers we have:
 # 1.source files: target/*.tar.gz | 2.remove prefix: target | 3.exec command as:
 
-sudo sh /var/wplex/apps/wplex-garagem/bin/stop.sh
-sudo rm -rf /var/wplex/apps/wplex-garagem
-sudo tar -zxvf /var/wplex/apps/artifact/wplex-garagem-*-dev.tar.gz -C /var/wplex/apps/
-sudo rm -rf /var/wplex/apps/wplex-garagem/*.properties
-sudo cp /var/wplex/apps/application-prd-garagem.properties /var/wplex/apps/wplex-garagem/config
-sudo nohup nice /var/wplex/apps/wplex-garagem/bin/start.sh prd-garagem > /dev/null 2>&1 &
+sudo sh /var/wplex/apps/vulcano-health-check-monitor/bin/stop.sh
+sudo rm -rf /var/wplex/apps/vulcano-health-check-monitor
+sudo tar -zxvf /var/wplex/apps/artifact/vulcano-health-check-monitor-*-dev.tar.gz -C /var/wplex/apps/
+sudo rm -rf /var/wplex/apps/vulcano-health-check-monitor/*.properties
+sudo cp /var/wplex/apps/application-prd-health-monitor.properties /var/wplex/apps/vulcano-health-check-monitor/config
+sudo nohup nice /var/wplex/apps/vulcano-health-check-monitor/bin/start.sh prd-health-monitor > /dev/null 2>&1 &
