@@ -128,11 +128,13 @@
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
+				<!--
 				<excludes>
 					<exclude>*.properties</exclude>
 					<exclude>*.xml</exclude>
 					<exclude>*.sql</exclude>
 				</excludes>
+				 -->
 				<filtering>false</filtering>
 			</resource>
 		</resources>
