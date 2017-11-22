@@ -1,6 +1,7 @@
 # vulcano-health-check-monitor
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Build Status](https://travis-ci.org/ryanpadilha/vulcano-health-check-monitor.png)](https://travis-ci.org/ryanpadilha/vulcano-health-check-monitor)
 
 Vulcano Health Check API Monitor for Microservices.<br>
 This application consume exposed endpoints for monitoring services on SOA.<br><br>
