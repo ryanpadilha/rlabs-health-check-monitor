@@ -125,17 +125,11 @@
 	</dependencies>
 
 	<build>
-
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
-				<!--
-				<excludes>
-					<exclude>*.properties</exclude>
-					<exclude>*.xml</exclude>
-					<exclude>*.sql</exclude>
-				</excludes>
-				-->
+				<!-- <excludes> <exclude>*.properties</exclude> <exclude>*.xml</exclude>
+					<exclude>*.sql</exclude> </excludes> -->
 				<filtering>false</filtering>
 			</resource>
 		</resources>
@@ -172,7 +166,7 @@
 			</plugin>
 		</plugins>
 
-		<finalName>${project.artifactId}</finalName>
+		<finalName>${project.artifactId}-${project.version}</finalName>
 	</build>
 
 	<repositories>
@@ -192,6 +186,14 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
+		<repository>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>bintray-ryanpadilha-maven</id>
+			<name>bintray</name>
+			<url>https://dl.bintray.com/ryanpadilha/maven</url>
+		</repository>
 	</repositories>
 
 	<pluginRepositories>
@@ -210,6 +212,14 @@
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
+		</pluginRepository>
+		<pluginRepository>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>bintray-ryanpadilha-maven</id>
+			<name>bintray-plugins</name>
+			<url>https://dl.bintray.com/ryanpadilha/maven</url>
 		</pluginRepository>
 	</pluginRepositories>
 </project>
