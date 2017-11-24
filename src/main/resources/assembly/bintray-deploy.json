@@ -1,7 +1,7 @@
 {
 	"package": {
 		"name": "vulcano-health-check-monitor",
-		"repo": "ryanpadilha/maven",
+		"repo": "ryanpadilha/generic",
 		"desc": "Vulcano Health Check API Monitor for Microservices",
 		"website_url": "labix.com.br",
 		"issue_tracker_url": "https://github.com/ryanpadilha/vulcano-health-check-monitor/issues",
