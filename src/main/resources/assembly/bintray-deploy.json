@@ -20,7 +20,7 @@
 	},
 	"files": [
 		{
-			"includePattern": "target/(.*)",
+			"includePattern": "target/(.*\.jar)",
 			"uploadPattern": "com/rlabs/oss/health/vulcano-health-check-monitor/0.0.1/$1"
 		}
 	],
